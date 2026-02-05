@@ -61,6 +61,29 @@ code,
     font-size: 0.9rem !important;
 }
 
+/* Custom Scrollbar for Code Blocks */
+.hljs::-webkit-scrollbar {
+    height: 8px;
+    /* Horizontal Scrollbar Height */
+}
+
+.hljs::-webkit-scrollbar-track {
+    background: #21252b;
+    /* Slightly darker than code bg */
+    border-radius: 4px;
+}
+
+.hljs::-webkit-scrollbar-thumb {
+    background: #4b5263;
+    /* Muted Grey */
+    border-radius: 4px;
+}
+
+.hljs::-webkit-scrollbar-thumb:hover {
+    background: #5c6370;
+    /* Slightly lighter on hover */
+}
+
 /* Atom One Dark Syntax Colors (Forced) */
 .hljs-comment,
 .hljs-quote {
@@ -73,6 +96,11 @@ code,
 .hljs-formula {
     color: #c678dd !important;
     /* Purple */
+}
+
+.hljs-built_in {
+    color: #e5c07b !important;
+    /* Soft Gold/Yellow for print(), etc. */
 }
 
 .hljs-section,
@@ -833,6 +861,14 @@ figure[data-ke-type="opengraph"] .og-host::before {
 .tt_article_useless_p_margin blockquote p {
     margin: 0 !important;
     line-height: 1.7 !important;
+}
+
+/* Remove Automatic Quotes (Tailwind Typography Reset) */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after,
+.tt_article_useless_p_margin blockquote p:first-of-type::before,
+.tt_article_useless_p_margin blockquote p:last-of-type::after {
+    content: none !important;
 }
 
 /* Style 1: Centered Quote (인용1) - Editor Style Adapted */
