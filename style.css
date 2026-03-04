@@ -93,6 +93,8 @@ code,
     display: block;
     overflow-x: auto;
     padding: 1.25rem !important;
+    margin: 1rem 0 !important;
+    /* Added to reduce vertical spacing from default */
     border-radius: 0.75rem !important;
     line-height: 1.6 !important;
     font-size: 0.9rem !important;
@@ -307,6 +309,11 @@ p[data-ke-size] strong {
 }
 
 /* Tistory Editor Table Overrides for Dark Mode */
+.prose table {
+    margin: 1rem 0 !important;
+    /* Added to reduce vertical spacing */
+}
+
 .prose table,
 .prose table * {
     background-color: var(--bg-surface) !important;
@@ -663,7 +670,8 @@ input[type="checkbox"]:checked {
 /*                          Link Embed (OpenGraph) Styling                    */
 /* -------------------------------------------------------------------------- */
 figure[data-ke-type="opengraph"] {
-    margin: 2rem 0;
+    margin: 1rem 0 !important;
+    /* Reduced from 2rem 0 */
     width: 100%;
 }
 
@@ -1028,8 +1036,10 @@ figure[data-ke-type="opengraph"] .og-host::before {
 /* Common Blockquote Reset */
 .prose blockquote,
 .tt_article_useless_p_margin blockquote {
-    margin: 2rem 0 !important;
-    padding: 1.5rem 2rem !important;
+    margin: 1rem 0 !important;
+    /* Reduced from 2rem 0 */
+    padding: 1rem 1.5rem !important;
+    /* Slightly tighter padding too */
     word-break: break-all;
     color: #e4e4e7 !important;
     /* zinc-200 */
@@ -1298,7 +1308,8 @@ figure[data-ke-type="opengraph"] .og-host::before {
     /* 17px - optimal reading size */
     color: #d4d4d8 !important;
     /* zinc-300 */
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 0.8rem !important;
+    /* Reduced from 1.5rem for tighter spacing */
     line-height: 1.8 !important;
     /* Relaxed reading */
     word-break: break-all;
@@ -1307,13 +1318,15 @@ figure[data-ke-type="opengraph"] .og-host::before {
 /* List Styling */
 .tt_article_useless_p_margin ul,
 .tt_article_useless_p_margin ol {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 0.8rem !important;
+    /* Reduced from 1.5rem */
     padding-left: 1.5rem !important;
     color: #d4d4d8 !important;
 }
 
 .tt_article_useless_p_margin li {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
+    /* Reduced from 0.5rem */
     line-height: 1.7 !important;
 }
 
