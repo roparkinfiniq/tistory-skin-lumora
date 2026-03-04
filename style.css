@@ -462,39 +462,6 @@ figure[data-ke-type="opengraph"] .og-host {
 }
 
 /* =========================================
-   Prev / Next Post Navigation Container
-   ========================================= */
-.post-nav-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .post-nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-
-.post-nav-item {
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .post-nav-item {
-        width: 48%;
-        max-width: 48%;
-        flex-shrink: 0;
-    }
-}
-
-.post-nav-next {
-    margin-left: auto;
-}
-
-/* =========================================
    6. Search Input Design (Global)
    ========================================= */
 /* 4. FOUC Prevention (JS-Triggered Fade-In) */
