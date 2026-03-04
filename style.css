@@ -1,6 +1,46 @@
 @charset "utf-8";
 
 /* =========================================
+   0. CSS Variables (The Essential Dark Theme)
+   ========================================= */
+:root {
+    /* Base Colors */
+    --bg-body: #18181b;
+    /* 딥 다크 배경 (Deep Dark) */
+    --bg-surface: #27272a;
+    /* 카드/표면 기본 (Surface) */
+    --bg-surface-hover: #3f3f46;
+
+    /* Typography */
+    --text-primary: #e4e4e7;
+    /* 주 텍스트 (Light Gray) */
+    --text-secondary: #a1a1aa;
+    /* 보조 텍스트 (Muted) */
+    --text-tertiary: #71717a;
+    /* 매우 흐린 텍스트 (Dim) */
+
+    /* Brand/Accent Colors (포인트 컬러) */
+    /* 기본은 터미널 민트(Terminal Mint)이지만 언제든 커스텀 가능 */
+    --accent-color: #14b8a6;
+    /* 메인 포인트 컬러 */
+    --accent-color-hover: #2dd4bf;
+    /* 호버 시 밝은 톤 */
+    --accent-blue: #06b6d4;
+    /* 보조 포인트 컬러 (청색/시안 연결 고리) */
+
+    /* Layout Borders */
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    /* 경계선만 살짝 (매우 연한 흰색 선) */
+    --border-medium: rgba(255, 255, 255, 0.1);
+
+    /* Shadows - 가벼운 엘리베이션 */
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 15px -3px rgba(20, 184, 166, 0.15);
+    /* 은은한 엑센트 글로우 */
+}
+
+
+/* =========================================
    1. Global Resets & Tistory Overrides
    ========================================= */
 #tistory-toolbar,
@@ -45,10 +85,8 @@ pre,
 code,
 .prose pre,
 .prose code {
-    background-color: #282c34 !important;
-    /* Atom One Dark BG */
-    color: #abb2bf !important;
-    /* Atom One Dark FG */
+    background-color: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
     font-family: 'JetBrains Mono', monospace !important;
 }
 
@@ -59,29 +97,27 @@ code,
     border-radius: 0.75rem !important;
     line-height: 1.6 !important;
     font-size: 0.9rem !important;
+    border: 1px solid var(--border-subtle) !important;
+    /* 약간의 구분선 추가 */
 }
 
 /* Custom Scrollbar for Code Blocks */
 .hljs::-webkit-scrollbar {
-    height: 8px;
-    /* Horizontal Scrollbar Height */
+    height: 6px;
+    /* 더 얇고 미니멀하게 */
 }
 
 .hljs::-webkit-scrollbar-track {
-    background: #21252b;
-    /* Slightly darker than code bg */
-    border-radius: 4px;
+    background: transparent;
 }
 
 .hljs::-webkit-scrollbar-thumb {
-    background: #4b5263;
-    /* Muted Grey */
+    background: var(--bg-surface-hover);
     border-radius: 4px;
 }
 
 .hljs::-webkit-scrollbar-thumb:hover {
     background: #5c6370;
-    /* Slightly lighter on hover */
 }
 
 /* Atom One Dark Syntax Colors (Forced) */
@@ -180,6 +216,63 @@ code,
     margin: 1.5em 0;
 }
 
+/* Tistory Editor Table Overrides for Dark Mode */
+.prose table,
+.prose table * {
+    background-color: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-medium) !important;
+}
+
+.prose table th,
+.prose table td {
+    border: 1px solid var(--border-medium) !important;
+    padding: 0.75rem !important;
+}
+
+.prose table th,
+.prose table thead td,
+.prose table [data-ke-style] th {
+    background-color: var(--bg-surface-hover) !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+.prose table [data-ke-style] td {
+    background-color: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Tistory OpenGraph Bookmark Hover Fix (Prevent Jitter) */
+figure[data-ke-type="opengraph"] a,
+figure[data-ke-type="opengraph"] a:hover {
+    transform: none !important;
+    text-decoration: none !important;
+}
+
+figure[data-ke-type="opengraph"] {
+    border: 1px solid var(--border-medium) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+figure[data-ke-type="opengraph"]:hover {
+    border-color: var(--accent-color) !important;
+    box-shadow: var(--shadow-glow) !important;
+}
+
+figure[data-ke-type="opengraph"] .og-text {
+    background-color: var(--bg-surface) !important;
+}
+
+figure[data-ke-type="opengraph"] .og-title,
+figure[data-ke-type="opengraph"] .og-desc,
+figure[data-ke-type="opengraph"] .og-host {
+    color: var(--text-primary) !important;
+    font-family: inherit !important;
+}
+
 /* =========================================
    2. Layout & Post Limits
    ========================================= */
@@ -240,20 +333,30 @@ code,
 .pagination a,
 .pagination span {
     pointer-events: auto;
-    padding: 8px 12px;
-    border-radius: 6px;
-    background: #27272a;
-    color: #a1a1aa;
+    padding: 8px 14px;
+    /* 더 편안한 클릭 영역 */
+    border-radius: 8px;
+    /* 통일된 곡률 */
+    background: transparent;
+    /* 배경 날리고 텍스트만 */
+    color: var(--text-secondary);
     font-size: 14px;
+    font-weight: 500;
     text-decoration: none;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 .pagination .selected,
 .pagination .current {
-    background: #c084fc;
-    color: white;
-    font-weight: bold;
+    background: var(--accent-color);
+    color: var(--bg-body);
+    /* 배경색을 텍스트로 써서 대비 극대화 */
+    font-weight: 700;
+}
+
+.pagination a:hover:not(.selected) {
+    background: var(--border-medium);
+    color: var(--text-primary);
 }
 
 /* =========================================
@@ -294,19 +397,17 @@ code,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 32px;
-    /* Slightly compact height */
-    padding: 0 16px;
-    font-size: 0.85rem;
-    font-weight: 400;
-    /* Regular weight */
-    color: #a1a1aa;
-    /* text-zinc-400 */
-    background: #18181b;
-    /* Dark specific bg matching reference */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    /* Soft rounded corners */
+    height: 30px;
+    /* 더 컴팩트하고 알리오 느낌 */
+    padding: 0 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    /* 보더리스 미니멀리즘 */
+    border: 1px solid var(--border-medium);
+    border-radius: 16px;
+    /* 완전 둥근 Pill 스타일 */
     transition: all 0.2s ease;
     text-decoration: none;
 }
@@ -314,16 +415,16 @@ code,
 /* Add Hash (#) Prefix */
 .tag-container a::before {
     content: "#";
-    margin-right: 2px;
-    color: #71717a;
-    /* Dimmer hash */
+    margin-right: 4px;
+    color: var(--accent-color);
+    /* 엑센트로 포인트 */
+    opacity: 0.7;
 }
 
 .tag-container a:hover {
-    background: #27272a;
-    /* Slightly lighter on hover */
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--border-subtle);
+    color: var(--text-primary);
+    border-color: var(--accent-color-hover);
 }
 
 /* Hide the old icon if it exists in HTML, as reference doesn't emphasize it */
@@ -346,39 +447,35 @@ code,
 /* [Extended] 8. Modern Comment Section Styling */
 /* Input Box Visibility Fix */
 #comments-section textarea {
-    background-color: rgba(39, 39, 42, 0.6) !important;
-    /* Lighter bg */
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    /* Stronger border */
-    color: #f4f4f5 !important;
+    background-color: var(--bg-surface) !important;
+    border: 1px solid var(--border-subtle) !important;
+    color: var(--text-primary) !important;
+    box-shadow: none !important;
 }
 
 #comments-section textarea:focus {
-    background-color: rgba(39, 39, 42, 0.9) !important;
-    border-color: #c084fc !important;
+    background-color: var(--bg-body) !important;
+    /* 약간 들어간 느낌 */
+    border-color: var(--accent-color) !important;
 }
 
 /* Admin (Owner) Styling */
-/* Tistory adds 'rp_admin' class to the li if it's the owner */
 li.rp_admin .rp_admin-avatar {
-    border: 2px solid #c084fc !important;
-    /* Purple border for owner */
+    border: 2px solid var(--accent-color) !important;
 }
 
 li.rp_admin .flex-1 .flex span:first-child {
-    color: #c084fc !important;
-    /* Purple name */
+    color: var(--accent-color) !important;
 }
 
 /* Add Checkmark Badge for Owner */
 li.rp_admin .flex-1 .flex span:first-child::after {
     content: '\f058';
-    /* FontAwesome Check Circle */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     margin-left: 6px;
     font-size: 0.85rem;
-    color: #c084fc;
+    color: var(--accent-color);
 }
 
 /* Secret Comment Styling */
@@ -432,30 +529,28 @@ li:not(.rp_admin):hover img.guest-avatar-enhanced {
 /* Input Form Focus Effects */
 textarea:focus {
     box-shadow: none !important;
-    /* Remove default browser rings */
 }
 
 /* Checkbox Customization */
 input[type="checkbox"]:checked {
     background-color: transparent !important;
-    border-color: #c084fc !important;
-    color: #c084fc !important;
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23c084fc' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e") !important;
+    border-color: var(--accent-color) !important;
+    color: var(--accent-color) !important;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%2314b8a6' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e") !important;
 }
 
-
-color: #e4e4e7 !important;
-/* text-zinc-200 */
-text-decoration: none !important;
-text-overflow: ellipsis;
-overflow: hidden;
-white-space: nowrap;
-max-width: 60vw;
-/* Prevent overflow */
+.another_category a {
+    color: var(--text-primary) !important;
+    text-decoration: none !important;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 60vw;
+    /* Prevent overflow */
 }
 
 .another_category tr:hover td a {
-    color: #c084fc !important;
+    color: var(--accent-color) !important;
 }
 
 /* Date */
@@ -477,26 +572,24 @@ figure[data-ke-type="opengraph"] {
 
 figure[data-ke-type="opengraph"] a {
     display: flex !important;
-    min-height: 150px !important;
+    min-height: 140px !important;
     height: auto !important;
-    /* Allow growth */
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 16px !important;
-    background-color: rgba(24, 24, 27, 0.6) !important;
-    /* zinc-900/60 */
+    border: 1px solid var(--border-subtle) !important;
+    /* 선 얇게 */
+    border-radius: 12px !important;
+    background-color: transparent !important;
+    /* 배경 날리고 보더리스화 */
     text-decoration: none !important;
     overflow: hidden !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
+    /* 그림자 삭제로 깔끔함 유지 */
 }
 
 figure[data-ke-type="opengraph"] a:hover {
-    background-color: rgba(39, 39, 42, 0.8) !important;
-    /* zinc-800/80 */
-    border-color: rgba(192, 132, 252, 0.3) !important;
-    /* accent/30 */
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border-medium) !important;
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
 /* Image Section */
@@ -572,14 +665,10 @@ figure[data-ke-type="opengraph"] .og-desc {
 }
 
 /* Host/URL */
-/* Host/URL */
-/* Host/URL */
 figure[data-ke-type="opengraph"] .og-host {
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.75rem !important;
-    /* 12px */
-    color: #71717a !important;
-    /* zinc-500 */
+    color: var(--text-tertiary) !important;
     margin-top: 0 !important;
     position: absolute !important;
     bottom: -17px !important;
@@ -595,12 +684,10 @@ figure[data-ke-type="opengraph"] .og-host {
 
 figure[data-ke-type="opengraph"] .og-host::before {
     content: '\f0c1';
-    /* Link Icon */
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     font-size: 0.7rem;
-    color: #c084fc;
-    /* accent */
+    color: var(--accent-color);
     opacity: 0.7;
 }
 
@@ -620,19 +707,16 @@ figure[data-ke-type="opengraph"] .og-host::before {
     /* 1. Container: Horizontal Flex Layout */
     html body figure[data-ke-type="opengraph"] a {
         display: flex !important;
-        /* Row Layout */
         flex-direction: row !important;
         height: 80px !important;
         min-height: 80px !important;
-        /* Compact Height FORCE OVERRIDE */
         margin: 0 !important;
         padding: 0 !important;
         text-decoration: none !important;
-        background: #18181b !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        border-radius: 12px !important;
+        background: transparent !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: 8px !important;
         overflow: hidden !important;
-        /* Clip image corners */
     }
 
     /* 2. Image: Thumbnail Style (Left) */
@@ -708,73 +792,70 @@ figure[data-ke-type="opengraph"] .og-host::before {
 
 /* 1. Comment Form Container */
 .comment-form-box {
-    background: linear-gradient(145deg, rgba(39, 39, 42, 0.4), rgba(24, 24, 27, 0.95)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(10px);
+    background: transparent !important;
+    /* 그라데이션 제거, 백그라운드와 통일하여 가볍게 */
+    border: 1px solid var(--border-subtle) !important;
+    box-shadow: none !important;
 }
 
 @media (max-width: 768px) {
     .comment-form-box {
-        backdrop-filter: none !important;
-        background: #18181b !important;
-        /* Fallback solid color */
+        background: transparent !important;
+        border-radius: 0;
+        border-left: none !important;
+        border-right: none !important;
     }
 }
 
 /* 2. Textarea Styling */
 .comment-form-box textarea {
-    background-color: rgba(0, 0, 0, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
-    padding: 1.25rem !important;
+    background-color: var(--bg-surface) !important;
+    border: none !important;
+    /* 박스선 보이지 않도록 깔끔하게 */
+    border-radius: 8px !important;
+    padding: 1rem !important;
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
-    color: #f4f4f5 !important;
-    /* zinc-100 */
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    height: 120px !important;
+    color: var(--text-primary) !important;
+    transition: all 0.2s ease !important;
+    height: 100px !important;
 }
 
 .comment-form-box textarea::placeholder {
-    color: rgba(161, 161, 170, 0.8) !important;
-    /* zinc-400/80 - More visible */
-    font-weight: 500;
+    color: var(--text-tertiary) !important;
+    font-weight: 400;
 }
 
 .comment-form-box textarea:focus {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    border-color: rgba(192, 132, 252, 0.6) !important;
-    /* accent/60 */
-    box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.15) !important;
+    background-color: var(--bg-body) !important;
+    box-shadow: inset 0 0 0 1px var(--accent-color) !important;
+    /* 보더 대신 내부 링으로 깔끔한 포커스 효과 */
 }
 
 /* 3. Submit Button Styling */
 .comment-form-box button {
-    background: #7c3aed !important;
-    /* Solid Violet 600 - Calmer, deep purple */
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    border: none !important;
-    padding: 0.6rem 2rem !important;
-    border-radius: 9999px !important;
-    font-size: 0.95rem !important;
-    letter-spacing: 0.02em !important;
+    background: transparent !important;
+    color: var(--accent-color) !important;
+    /* 플랫 디자인: 바탕색 없이 텍스트 포인트 */
+    font-weight: 600 !important;
+    border: 1px solid var(--border-medium) !important;
+    padding: 0.5rem 1.75rem !important;
+    border-radius: 6px !important;
+    font-size: 0.9rem !important;
     transition: all 0.2s ease !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    /* Standard subtle shadow, no glow */
+    box-shadow: none !important;
     cursor: pointer;
 }
 
 .comment-form-box button:hover {
-    background: #6d28d9 !important;
-    /* Violet 700 hover */
-    transform: translateY(-1px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    background: var(--bg-surface-hover) !important;
+    border-color: var(--accent-color) !important;
+    transform: none;
+    box-shadow: none;
 }
 
 .comment-form-box button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
 /* 4. Guest Input Fields - Completely Hidden (Logged-in only) */
@@ -799,18 +880,17 @@ figure[data-ke-type="opengraph"] .og-host::before {
 }
 
 .comment-form-box label:hover span {
-    color: #c084fc !important;
+    color: var(--accent-color) !important;
 }
 
 .comment-form-box input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
-    width: 1.25rem !important;
-    height: 1.25rem !important;
-    border: 1.5px solid rgba(161, 161, 170, 0.5) !important;
+    width: 1.1rem !important;
+    height: 1.1rem !important;
+    border: 1px solid var(--border-medium) !important;
     border-radius: 4px !important;
-    /* Slightly less rounded */
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: transparent !important;
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
@@ -819,17 +899,18 @@ figure[data-ke-type="opengraph"] .og-host::before {
 }
 
 .comment-form-box input[type="checkbox"]:checked {
-    background-color: #c084fc !important;
-    border-color: #c084fc !important;
+    background-color: transparent !important;
+    /* 체크박스 배경색 제거, 테두리 포인트 */
+    border-color: var(--accent-color) !important;
 }
 
 .comment-form-box input[type="checkbox"]:checked::after {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    font-size: 0.75rem;
-    color: #ffffff;
-    /* White check for better contrast */
+    font-size: 0.65rem;
+    color: var(--accent-color);
+    /* 엑센트 아이콘 */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -837,7 +918,7 @@ figure[data-ke-type="opengraph"] .og-host::before {
 }
 
 .comment-form-box input[type="checkbox"]:hover {
-    border-color: #c084fc !important;
+    border-color: var(--accent-color) !important;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -907,22 +988,24 @@ figure[data-ke-type="opengraph"] .og-host::before {
 /* Style 2: Left Line (인용2) */
 .prose blockquote[data-ke-style="style2"],
 .tt_article_useless_p_margin blockquote[data-ke-style="style2"] {
-    border-left: 4px solid #c084fc !important;
-    /* Accent */
+    border-left: 3px solid var(--accent-color) !important;
     border-right: none !important;
     border-top: none !important;
     border-bottom: none !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border-radius: 0 8px 8px 0 !important;
+    background: transparent !important;
+    /* 배경 날려서 본문과 녹아들게 */
+    padding-left: 1.25rem !important;
+    /* 약간의 들여쓰기만 유지 */
+    border-radius: 0 !important;
 }
 
 /* Style 3: Box (인용3) */
 .prose blockquote[data-ke-style="style3"],
 .tt_article_useless_p_margin blockquote[data-ke-style="style3"] {
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid var(--border-subtle) !important;
     background: transparent !important;
-    border-radius: 12px !important;
-    color: #d4d4d8 !important;
+    border-radius: 8px !important;
+    color: var(--text-primary) !important;
 }
 
 /* Fallback / Default Blockquote Styling */
@@ -938,20 +1021,18 @@ figure[data-ke-type="opengraph"] .og-host::before {
 /* -------------------------------------------------------------------------- */
 .tt_article_useless_p_margin a,
 .prose a {
-    color: #c084fc !important;
-    /* Accent Purple */
+    color: var(--accent-color) !important;
     text-decoration: none !important;
-    border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+    border-bottom: 1px dashed var(--border-medium);
+    /* 실선에서 점선으로 더 가볍게 */
     transition: all 0.2s ease;
 }
 
 .tt_article_useless_p_margin a:hover,
 .prose a:hover {
-    color: #d8b4fe !important;
-    /* Lighter Purple */
-    border-bottom-color: #d8b4fe;
-    background: rgba(192, 132, 252, 0.1);
-    border-radius: 2px;
+    color: var(--accent-color-hover) !important;
+    border-bottom: 1px solid var(--accent-color);
+    background: transparent;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -959,47 +1040,31 @@ figure[data-ke-type="opengraph"] .og-host::before {
 /* -------------------------------------------------------------------------- */
 .nav-card {
     position: relative;
-    background-color: #18181b !important;
-    /* zinc-900 */
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 1rem !important;
+    background-color: transparent !important;
+    /* 카드 배경 제거 */
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 8px !important;
     padding: 1.5rem !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 140px;
+    min-height: 120px;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
     text-decoration: none !important;
+    box-shadow: none !important;
 }
 
 .nav-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(192, 132, 252, 0.5) !important;
-    box-shadow: 0 10px 30px -5px rgba(192, 132, 252, 0.15);
+    border-color: var(--border-medium) !important;
+    background-color: var(--bg-surface) !important;
+    /* 약간 떠오르는 느낌만 */
+    transform: none;
 }
 
-/* Gradient Overlay */
+/* Gradient Overlay - 완전히 날려서 깔끔하게 */
 .nav-card .hover-gradient {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
-}
-
-.nav-card:hover .hover-gradient {
-    opacity: 1;
-}
-
-/* Prev Card Gradient */
-.nav-card.prev .hover-gradient {
-    background: linear-gradient(135deg, rgba(192, 132, 252, 0.1), transparent);
-}
-
-/* Next Card Gradient */
-.nav-card.next .hover-gradient {
-    background: linear-gradient(225deg, rgba(192, 132, 252, 0.1), transparent);
+    display: none !important;
 }
 
 /* Content Layer */
@@ -1010,30 +1075,15 @@ figure[data-ke-type="opengraph"] .og-host::before {
 
 /* Icon Circle */
 .nav-card .icon-circle {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 9999px;
-    background-color: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.nav-card:hover .icon-circle {
-    background-color: #c084fc;
-    color: #000;
-}
-
-.nav-card:hover .icon-circle i {
-    color: #000 !important;
+    display: none !important;
+    /* 네비 카드 아이콘 원 제거 */
 }
 
 /* Text Styles */
 .nav-card h4 {
-    font-size: 1.125rem !important;
-    font-weight: 700 !important;
-    color: #e4e4e7 !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
     line-height: 1.4 !important;
     margin-top: 0.5rem !important;
     transition: color 0.3s ease;
@@ -1044,53 +1094,45 @@ figure[data-ke-type="opengraph"] .og-host::before {
 }
 
 .nav-card:hover h4 {
-    color: #ffffff !important;
+    color: var(--accent-color) !important;
 }
 
 .nav-card .label {
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 500;
+    /* 조금 덜 강하게 */
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #71717a;
-    /* zinc-500 */
+    color: var(--text-tertiary);
     transition: color 0.3s ease;
 }
 
 .nav-card:hover .label {
-    color: #c084fc;
+    color: var(--text-secondary);
 }
 
 /* Custom Tag Styling - Subtle/Text Only */
 .tag-container a {
-    /* Reset Box Properties */
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
     padding: 0 !important;
-    margin: 0 0.35rem 0 0 !important;
-    /* Extremely tight right spacing */
+    margin: 0 0.5rem 0 0 !important;
 
-    /* Typography */
-    color: #52525b !important;
-    font-size: 0.7rem !important;
-    /* 11px equivalent */
+    color: var(--text-tertiary) !important;
+    font-size: 0.75rem !important;
     line-height: 1 !important;
-    /* Compact vertical height */
     font-weight: 400 !important;
     font-family: monospace, ui-monospace, SFMono-Regular !important;
-    /* Tech feel */
     text-decoration: none !important;
 
-    /* Transition */
     transition: color 0.2s ease !important;
     display: inline-block !important;
 }
 
 .tag-container a:hover {
-    color: #c084fc !important;
-    /* Accent Color on Hover */
+    color: var(--accent-color) !important;
     background: transparent !important;
     text-decoration: none !important;
 }
@@ -1110,48 +1152,43 @@ figure[data-ke-type="opengraph"] .og-host::before {
 /* Main Content Wrapper */
 .tt_article_useless_p_margin,
 .prose {
-    color: #e4e4e7;
-    /* zinc-200 */
-    line-height: 1.75;
+    color: var(--text-primary);
+    line-height: 1.8;
 }
 
-/* Title 1 (H2) - User liked this, keeping it prominent */
+/* Title 1 (H2) */
 .tt_article_useless_p_margin h2,
 .prose h2 {
-    font-size: 1.875rem !important;
-    /* 30px */
-    font-weight: 700 !important;
-    color: #f4f4f5 !important;
-    /* zinc-100 */
+    font-size: 1.6rem !important;
+    /* 조금 더 담백한 크기 */
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
     margin-top: 3.5rem !important;
     margin-bottom: 1.25rem !important;
     letter-spacing: -0.01em !important;
-    line-height: 1.3 !important;
-    border-bottom: none !important;
-    /* Clean look */
+    line-height: 1.4 !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    /* 밑줄을 은은하게 추가하여 구분 */
+    padding-bottom: 0.5rem !important;
 }
 
-/* Title 2 (H3) - Requested to be smaller */
+/* Title 2 (H3) */
 .tt_article_useless_p_margin h3,
 .prose h3 {
-    font-size: 1.5rem !important;
-    /* 24px (Reduced from typical 1.5rem~1.8rem) */
+    font-size: 1.35rem !important;
     font-weight: 600 !important;
-    color: #e4e4e7 !important;
-    /* zinc-200 */
+    color: var(--text-primary) !important;
     margin-top: 2.5rem !important;
     margin-bottom: 1rem !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
 }
 
-/* Title 3 (H4) - Distinct subsection style */
+/* Title 3 (H4) */
 .tt_article_useless_p_margin h4,
 .prose h4 {
-    font-size: 1.25rem !important;
-    /* 20px */
+    font-size: 1.15rem !important;
     font-weight: 600 !important;
-    color: #d4d4d8 !important;
-    /* zinc-300 */
+    color: var(--text-secondary) !important;
     margin-top: 2rem !important;
     margin-bottom: 0.75rem !important;
     line-height: 1.5 !important;
@@ -1199,12 +1236,11 @@ figure[data-ke-type="opengraph"] .og-host::before {
 .prose hr {
     display: block;
     border: 0;
-    margin: 4rem auto !important;
+    margin: 3rem auto !important;
     opacity: 1 !important;
-    /* Ensure visibility */
 }
 
-/* Style 1: Dots (· · ·) - Kept as is */
+/* Style 1: Dots (· · ·) */
 .tt_article_useless_p_margin hr[data-ke-style="style1"],
 .prose hr[data-ke-style="style1"] {
     background: transparent !important;
@@ -1216,19 +1252,14 @@ figure[data-ke-type="opengraph"] .og-host::before {
 .tt_article_useless_p_margin hr[data-ke-style="style1"]::after,
 .prose hr[data-ke-style="style1"]::after {
     content: "· · ·";
-    font-size: 40px;
-    line-height: 0px;
+    font-size: 24px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #e4e4e7;
-    /* zinc-200 (Bright for contrast) */
-    font-weight: 900;
-    letter-spacing: 12px;
-    text-indent: 12px !important;
-    /* Perfect center alignment */
-    margin-right: 0 !important;
+    color: var(--text-tertiary);
+    letter-spacing: 8px;
+    text-indent: 8px !important;
 }
 
 /* Style 2: Thick Short Line (-) */
@@ -1399,36 +1430,31 @@ figure[data-ke-type="opengraph"] .og-host::before {
     visibility: visible !important;
 }
 
-/* Styling Tistory 'Load More Comments' Button (System Generated) */
+/* Styling Tistory 'Load More Comments' Button */
 .tt_more_preview_comments_wrap {
-    background-color: #27272a !important;
-    /* bg-zinc-800 */
-    border-radius: 9999px !important;
+    background-color: transparent !important;
+    border: 1px solid var(--border-medium) !important;
+    border-radius: 6px !important;
     padding: 8px 16px !important;
     margin: 20px auto !important;
     width: fit-content !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     text-align: center !important;
 }
 
 .tt_more_preview_comments_wrap:hover {
-    background-color: #3f3f46 !important;
-    /* bg-zinc-700 */
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    background-color: var(--bg-surface) !important;
 }
 
 .tt_more_preview_comments_text {
-    color: #a1a1aa !important;
-    /* text-zinc-400 */
-    font-size: 0.875rem !important;
-    /* text-sm */
+    color: var(--text-secondary) !important;
+    font-size: 0.85rem !important;
     font-weight: 500 !important;
 }
 
 .tt_more_preview_comments_wrap:hover .tt_more_preview_comments_text {
-    color: #ffffff !important;
+    color: var(--text-primary) !important;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -1,4 +1,4 @@
-
+﻿
 // Mobile Menu Toggle
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
@@ -38,7 +38,7 @@ function toggleSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Script v54 Loaded'); // Updated Version
+    console.log('Script v56 Loaded'); // Updated Version
 
     // 0. Format Dates (Remove Time) - Run First
     formatDates();
@@ -190,6 +190,11 @@ function revealUI() {
         targets.forEach(el => {
             if (el) el.classList.add('is-loaded');
         });
+
+        // Ensure all generic cloaked elements are revealed
+        document.querySelectorAll('.cloak-until-loaded').forEach(el => {
+            el.classList.add('loaded');
+        });
     }, 100);
 
     // Fallback: Force reveal after 1s in case something hangs
@@ -205,6 +210,11 @@ function revealUI() {
 
         targets.forEach(el => {
             if (el && !el.classList.contains('is-loaded')) el.classList.add('is-loaded');
+        });
+
+        // Ensure all generic cloaked elements are revealed
+        document.querySelectorAll('.cloak-until-loaded').forEach(el => {
+            if (!el.classList.contains('loaded')) el.classList.add('loaded');
         });
     }, 1000);
 }
@@ -328,12 +338,10 @@ function initTOC() {
 function styleCategories() {
     const categoryLists = document.querySelectorAll('.tt_category, #desktop-category-container > ul');
 
+    // Default unified minimal style for all categories
+    // For advanced customization, users can add more objects to this array.
     const styles = [
-        { icon: 'fa-layer-group', color: 'text-purple-400', bg: 'bg-purple-400/10', border: 'bg-purple-400' },
-        { icon: 'fa-laptop-code', color: 'text-blue-400', bg: 'bg-blue-400/10', border: 'bg-blue-400' },
-        { icon: 'fa-bug', color: 'text-pink-400', bg: 'bg-pink-400/10', border: 'bg-pink-400' },
-        { icon: 'fa-pen-nib', color: 'text-green-400', bg: 'bg-green-400/10', border: 'bg-green-400' },
-        { icon: 'fa-book-open', color: 'text-yellow-400', bg: 'bg-yellow-400/10', border: 'bg-yellow-400' }
+        { icon: 'fa-folder', color: 'text-zinc-400 group-hover:text-accent', activeColor: 'text-accent', bg: 'bg-white/5', activeBg: 'bg-accent/20', border: 'bg-accent' }
     ];
 
     // Helper: Smart Parse Name and Count
@@ -406,8 +414,8 @@ function styleCategories() {
             const baseBg = isActive ? 'bg-white/10' : 'bg-transparent';
             const textState = isActive ? 'text-white' : 'text-zinc-400';
             const iconStyle = isActive
-                ? `${style.color} ${style.bg} bg-opacity-20`
-                : `${style.color} bg-white/5 group-hover:bg-white/10`;
+                ? `${style.activeColor} ${style.activeBg}`
+                : `${style.color} ${style.bg}`;
             const borderState = isActive ? 'opacity-100' : 'opacity-0';
 
             link.className = `group flex items-center justify-between w-full py-2.5 px-3 rounded-xl ${baseBg} hover:bg-white/5 transition-all cursor-pointer relative overflow-hidden select-none mb-0.5`;
@@ -417,7 +425,7 @@ function styleCategories() {
                 <div class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 ${style.border} rounded-r-md ${borderState} transition-opacity"></div>
                 
                 <div class="flex items-center gap-3 z-10 pl-1">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center shadow-inner bg-opacity-10 transition-colors ${iconStyle}">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center shadow-inner transition-colors ${iconStyle}">
                         <i class="fa-solid ${style.icon} text-sm"></i>
                     </div>
                     <span class="text-[15px] font-medium ${textState} group-hover:text-white transition-colors tracking-tight">${categoryName}</span>
@@ -517,7 +525,7 @@ function stylePagination() {
 
     const current = pagination.querySelector('.selected');
     if (current && current.tagName === 'SPAN') {
-        current.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-white text-sm font-bold shadow-[0_0_15px_-5px_#c084fc]';
+        current.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-white text-sm font-bold shadow-[0_0_15px_-5px_#14b8a6]';
     }
 }
 
@@ -563,37 +571,16 @@ function moveGuestbookPagination() {
     }
 }
 
-// 6. Subscribe Button Logic (Updated for Admin - Muted Style)
+// 6. Subscribe Button Logic (Simplified for Essential Dark)
 function initSubscribeButton() {
     const customBtn = document.getElementById('custom-subscribe-btn');
     if (!customBtn) return;
     if (customBtn.dataset.processed) return;
 
-    // Check if Admin (Owner) by using Tistory's global variable
-    const isOwner = window.T && window.T.config && window.T.config.ROLE === 'owner';
     const tistoryBtn = document.querySelector('.btn_subscription, .u_tistory_btn_subscribe');
-
     customBtn.dataset.processed = "true";
 
-    if (isOwner) {
-        // Admin Case - Muted Style (Like Subscribed/Inactive)
-        const label = customBtn.querySelector('.txt_label');
-        if (label) {
-            label.innerText = '내 블로그'; // "My Blog"
-        }
-
-        // Use Muted Style (Dark Gray) to be less visible
-        // bg-zinc-800, text-zinc-500
-        customBtn.classList.add('bg-zinc-800', 'text-zinc-500', 'cursor-default');
-        customBtn.classList.remove('bg-accent', 'text-white', 'border-accent', 'text-accent', 'hover:bg-zinc-700');
-
-        // Use inline style to ensure no border pop
-        customBtn.style.border = '1px solid rgba(255,255,255,0.05)';
-
-        customBtn.onclick = (e) => e.preventDefault();
-
-    } else if (tistoryBtn) {
-        // Normal Visitor Case
+    if (tistoryBtn) {
         const syncState = () => {
             const isSubscribed = tistoryBtn.classList.contains('following') ||
                 tistoryBtn.classList.contains('subscribed') ||
@@ -605,11 +592,9 @@ function initSubscribeButton() {
             }
 
             if (isSubscribed) {
-                customBtn.classList.add('bg-accent', 'text-white', 'border-accent');
-                customBtn.classList.remove('bg-zinc-800', 'text-accent');
+                customBtn.classList.add('subscribed');
             } else {
-                customBtn.classList.remove('bg-accent', 'text-white', 'border-accent');
-                customBtn.classList.add('bg-zinc-800', 'text-accent');
+                customBtn.classList.remove('subscribed');
             }
         };
 
@@ -619,13 +604,12 @@ function initSubscribeButton() {
             tistoryBtn.click();
         });
 
-        const observer = new MutationObserver(() => {
-            syncState();
-        });
+        const observer = new MutationObserver(() => syncState());
         observer.observe(tistoryBtn, { attributes: true, childList: true, subtree: true });
 
     } else {
-        console.log('Native subscribe button not found.');
+        // If Tistory button doesn't exist, hide custom button to avoid confusion
+        customBtn.style.display = 'none';
     }
 }
 
