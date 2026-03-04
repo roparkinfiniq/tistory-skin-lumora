@@ -226,6 +226,9 @@ code,
 /* -------------------------------------------------------------------------- */
 /*                        Tistory Image Caption Styling                       */
 /* -------------------------------------------------------------------------- */
+.prose figure figcaption,
+.prose figcaption,
+figure[data-ke-type="image"] figcaption,
 figure.imageblock figcaption,
 figure.imagegridblock figcaption,
 .tt_article_useless_p_margin figcaption,
@@ -233,8 +236,9 @@ figure.imagegridblock figcaption,
     font-size: 0.75rem !important;
     /* Smaller than Body 3 (size14 = 0.875rem) */
     color: var(--text-muted) !important;
-    margin-top: 0.5rem !important;
-    /* Pull closer to the image */
+    margin-top: 0.25rem !important;
+    /* Pull aggressively closer to the image */
+    padding-top: 0 !important;
     text-align: center;
     line-height: 1.4;
 }
