@@ -58,12 +58,25 @@ div[data-tistory-react-app="Namecard"],
 .tt_more_layer a[data-desktop-type="report"],
 .tt_more_layer a[data-mobile-type="report"],
 .tt_more_layer a[data-layer-type="report"],
-.tt_more_layer li:has(a[href*="/report/"]),
-/* Tistory Mobile Specific Layers */
+/* Tistory Mobile Specific & Wildcard Layers */
+a[data-action="report"],
+a[data-type="report"],
+a[data-value="report"],
+button[data-action="report"],
+button[data-type="report"],
+.btn_report,
+.link_report,
+.item_report,
+a[href*="/report/"],
+a[href*="reportFlag"],
+a[onclick*="report"],
+li:has(a[href*="/report/"]),
+li:has(a[data-action="report"]),
+li:has(a[data-type="report"]),
+li:has(a[onclick*="report"]),
 div[class*="dialog"] a[href*="/report/"],
 div[class*="layer"] a[href*="/report/"],
 div[class*="sheet"] a[href*="/report/"],
-li:has(a[href*="/report/"]),
 a[href^="javascript:require(['common.action']"][href*="report"] {
     display: none !important;
 }
