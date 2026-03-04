@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <skin>
 	<information>
-		<name>Lumora</name>
-		<version>1.1</version>
-		<description>개발자를 위한 세련된 다크모드 티스토리 스킨입니다. Tailwind CSS 기반의 높은 완성도와 모바일 최적화, 그리고 미니멀한 인터랙션 디테일이 돋보입니다.</description>
+		<name>Lumora Essential Dark</name>
+		<version>1.0</version>
+		<description>개발자를 위한 세련된 다크모드 티스토리 스킨입니다. (The Essential Dark Theme) Tailwind CSS 기반의 높은 완성도와 모바일 최적화, 그리고 미니멀한 인터랙션 디테일이 돋보입니다.</description>
 		<license>MIT License</license>
 	</information>
 	<author>
@@ -12,7 +12,7 @@
 		<email></email>
 	</author>
 	<default>
-		<recentEntries>5</recentEntries>
+		<recentEntries>5</recentEntries>s
 		<recentComments>5</recentComments>
 		<recentTrackbacks>5</recentTrackbacks>
 		<itemsOnIndex>10</itemsOnIndex>
@@ -33,7 +33,7 @@
 			<label>GitHub 주소</label>
 			<description>프로필이나 푸터에 표시할 GitHub 주소를 입력하세요.</description>
 			<type>STRING</type>
-			<default>https://github.com/raonepark/lumora_tistory</default>
+			<default>https://github.com/roparkinfiniq/tistory-skin-lumora</default>
 		</variable>
 	</variables>
 </skin>

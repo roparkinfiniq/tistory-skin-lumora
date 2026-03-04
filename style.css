@@ -47,7 +47,6 @@
 .tt_toolbar_container,
 .plugin_author,
 div[data-tistory-react-app="Namecard"],
-.tt_adsense_bottom,
 #tistorytoolbarid,
 .tt_menubar,
 #kakaoWrap #kakaoHead,
@@ -348,15 +347,22 @@ figure[data-ke-type="opengraph"] .og-host {
 
 .pagination .selected,
 .pagination .current {
-    background: var(--accent-color);
-    color: var(--bg-body);
-    /* 배경색을 텍스트로 써서 대비 극대화 */
+    background: transparent !important;
+    color: var(--accent-color) !important;
+    border: 1px solid var(--accent-color) !important;
+    box-shadow: none !important;
+    /* 기본 상태에서는 빛이 나지 않도록 제거 */
     font-weight: 700;
 }
 
-.pagination a:hover:not(.selected) {
-    background: var(--border-medium);
-    color: var(--text-primary);
+/* 호버 시에만 테마색(민트) 빛(glow)이 나도록 설정 */
+.pagination a:hover,
+.pagination span:hover {
+    background: var(--bg-surface-hover) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: var(--shadow-glow) !important;
+    /* 테마색(민트) 글로우 */
 }
 
 /* =========================================
