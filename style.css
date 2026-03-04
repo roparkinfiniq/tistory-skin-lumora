@@ -215,6 +215,97 @@ code,
     margin: 1.5em 0;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                        Tistory Typography Overrides                        */
+/* -------------------------------------------------------------------------- */
+/* 1. Bold (볼드) - Reset Tailwind override */
+.prose b,
+.prose strong,
+.tt_article_useless_p_margin b,
+.tt_article_useless_p_margin strong,
+p[data-ke-size] b,
+p[data-ke-size] strong {
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    /* Make it pop in dark mode */
+}
+
+/* 2. Italic (기울임꼴) */
+.prose i,
+.prose em,
+.tt_article_useless_p_margin i,
+.tt_article_useless_p_margin em {
+    font-style: italic !important;
+}
+
+/* 3. Underline (밑줄) */
+.prose u,
+.tt_article_useless_p_margin u {
+    text-decoration: underline !important;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent-color) !important;
+    /* Mint underline */
+}
+
+/* 4. Strikethrough (취소선) */
+.prose s,
+.prose strike,
+.prose del,
+.tt_article_useless_p_margin s,
+.tt_article_useless_p_margin strike,
+.tt_article_useless_p_margin del {
+    text-decoration: line-through !important;
+    text-decoration-color: var(--text-tertiary) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* 5. Tistory Body Sizes (본문 1, 2, 3) */
+/* 본문 1 (큰 크기 - size18/size20) */
+.prose p[data-ke-size="size18"],
+.tt_article_useless_p_margin p[data-ke-size="size18"],
+.prose p[data-ke-size="size20"],
+.tt_article_useless_p_margin p[data-ke-size="size20"] {
+    font-size: 1.15rem !important;
+    line-height: 1.8 !important;
+    color: var(--text-primary) !important;
+}
+
+/* 본문 2 (기본 크기 - size16) */
+.prose p[data-ke-size="size16"],
+.tt_article_useless_p_margin p[data-ke-size="size16"] {
+    font-size: 1.0rem !important;
+    line-height: 1.7 !important;
+}
+
+/* 본문 3 (작은 크기 - size14) */
+.prose p[data-ke-size="size14"],
+.tt_article_useless_p_margin p[data-ke-size="size14"] {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Headings Contrast Fixes */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.tt_article_useless_p_margin h1,
+.tt_article_useless_p_margin h2,
+.tt_article_useless_p_margin h3,
+.tt_article_useless_p_margin h4 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+}
+
+.prose h2,
+.tt_article_useless_p_margin h2 {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 14px;
+}
+
 /* Tistory Editor Table Overrides for Dark Mode */
 .prose table,
 .prose table * {
