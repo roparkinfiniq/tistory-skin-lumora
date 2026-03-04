@@ -224,6 +224,22 @@ code,
 }
 
 /* -------------------------------------------------------------------------- */
+/*                        Tistory Image Caption Styling                       */
+/* -------------------------------------------------------------------------- */
+figure.imageblock figcaption,
+figure.imagegridblock figcaption,
+.tt_article_useless_p_margin figcaption,
+.tt_article_useless_p_margin .cap1 {
+    font-size: 0.75rem !important;
+    /* Smaller than Body 3 (size14 = 0.875rem) */
+    color: var(--text-muted) !important;
+    margin-top: 0.5rem !important;
+    /* Pull closer to the image */
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* -------------------------------------------------------------------------- */
 /*                        Tistory Typography Overrides                        */
 /* -------------------------------------------------------------------------- */
 /* 1. Bold (볼드) - Reset Tailwind override */
