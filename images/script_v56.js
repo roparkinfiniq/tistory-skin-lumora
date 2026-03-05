@@ -525,7 +525,8 @@ function stylePagination() {
 
     const current = pagination.querySelector('.selected');
     if (current && current.tagName === 'SPAN') {
-        current.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-white text-sm font-bold shadow-[0_0_15px_-5px_#14b8a6]';
+        current.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-white text-sm font-bold border-transparent';
+        current.style.boxShadow = 'none'; // CRITICAL FIX: Kill lingering Tailwind cache from Tistory
     }
 }
 
