@@ -459,7 +459,11 @@ figure[data-ke-type="opengraph"] .og-host {
     color: var(--accent-color) !important;
     border: 1px solid var(--accent-color) !important;
     box-shadow: none !important;
-    /* 기본 상태에서는 빛이 나지 않도록 제거 */
+    text-shadow: none !important;
+    filter: none !important;
+    outline: none !important;
+    backdrop-filter: none !important;
+    /* 기본 상태에서는 어떤 종류의 빛 효과도 나지 않도록 모두 강제 제거 */
     font-weight: 700;
 }
 
