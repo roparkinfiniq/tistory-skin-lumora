@@ -1624,13 +1624,15 @@ html {
 
 /* 11. Prev/Next Post Empty State Fallbacks */
 #prev-post-container:empty::after,
-#next-post-container:empty::after {
+#next-post-container:empty::after,
+#prev-post-container.empty-nav::after,
+#next-post-container.empty-nav::after {
     content: "No Post";
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-h-[140px];
+    min-height: 140px;
     height: 140px;
     background-color: transparent;
     border: 1px dashed rgba(255, 255, 255, 0.05);

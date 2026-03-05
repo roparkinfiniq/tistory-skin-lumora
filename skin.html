@@ -566,6 +566,20 @@
                                                 </div>
                                             </div>
                                             <!-- </s_article_prev_next> -->
+                                            <script>
+                                                // Fallback for empty prev/next post slots
+                                                // Using JS because Tistory parser might leave whitespace, defeating CSS :empty
+                                                (function () {
+                                                    var prevContainer = document.getElementById('prev-post-container');
+                                                    var nextContainer = document.getElementById('next-post-container');
+                                                    if (prevContainer && prevContainer.innerHTML.trim() === '') {
+                                                        prevContainer.classList.add('empty-nav');
+                                                    }
+                                                    if (nextContainer && nextContainer.innerHTML.trim() === '') {
+                                                        nextContainer.classList.add('empty-nav');
+                                                    }
+                                                })();
+                                            </script>
 
                                             <!-- Tags moved to header -->
 
