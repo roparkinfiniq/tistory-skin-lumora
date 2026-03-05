@@ -1621,3 +1621,28 @@ html {
         height: 24px !important;
     }
 }
+
+/* 11. Prev/Next Post Empty State Fallbacks */
+#prev-post-container:empty::after,
+#next-post-container:empty::after {
+    content: "No Post";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-h-[140px];
+    height: 140px;
+    background-color: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    /* 16px to match 2xl */
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    /* 14px */
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    opacity: 0.5;
+    box-sizing: border-box;
+}
