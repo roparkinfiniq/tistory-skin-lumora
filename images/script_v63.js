@@ -38,13 +38,10 @@ function toggleSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Script v62 Loaded'); // Updated Version
+    console.log('Script v63 Loaded'); // Updated Version
 
     // 0. Format Dates (Remove Time) - Run First
     formatDates();
-
-    // 1. Run Layout Check immediately
-    checkLayout();
 
     // 2. Fix Guestbook Grid
     fixGuestbookGrid();

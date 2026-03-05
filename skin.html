@@ -270,6 +270,34 @@
                 <!-- Main Content Area -->
                 <main
                     class="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 content-start">
+                    <!-- FOUC Prevention Script -> Synchronous Execution Before Paint -->
+                    <script>
+                        (function () {
+                            const path = window.location.pathname;
+                            let isDetail = document.getElementById('view-indicator-detail') !== null;
+                            if (!isDetail && (path.includes('/entry/') || /^\/(\d+|m\/entry\/)/.test(path) || path.includes('/guestbook'))) {
+                                isDetail = true;
+                            }
+                            if (isDetail) {
+                                const sidebar = document.getElementById('sidebar-desktop');
+                                const mainLayout = document.getElementById('main-layout');
+                                const mainContent = document.querySelector('main');
+
+                                if (sidebar) {
+                                    sidebar.classList.remove('lg:block');
+                                    sidebar.style.setProperty('display', 'none', 'important');
+                                }
+                                if (mainLayout) {
+                                    mainLayout.classList.remove('lg:flex-row', 'gap-12');
+                                    mainLayout.classList.add('justify-center');
+                                }
+                                if (mainContent) {
+                                    mainContent.classList.remove('md:grid-cols-2', 'xl:grid-cols-3', 'xl:gap-8');
+                                    mainContent.classList.add('w-full', 'max-w-4xl', 'mx-auto');
+                                }
+                            }
+                        })();
+                    </script>
 
                     <!-- Feature: List Header (Search/Category Results) -->
                     <s_list>
@@ -1323,7 +1351,7 @@
             });
         </script>
         <!-- Custom Script (Versioning) -->
-        <script src="./images/script_v62.js"></script>
+        <script src="./images/script_v63.js"></script>
     </s_t3>
 </body>
 
