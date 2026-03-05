@@ -517,14 +517,14 @@ function stylePagination() {
     links.forEach(link => {
         link.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 text-sm hover:bg-zinc-800 hover:text-white hover:border-accent/30 transition-all';
         if (link.classList.contains('selected')) {
-            link.classList.add('bg-accent', 'text-white', 'border-accent');
+            link.classList.add('bg-accent', 'text-bgBody', 'border-accent');
         }
     });
 
     const current = pagination.querySelector('.selected');
     if (current && current.tagName === 'SPAN') {
-        current.className = 'selected w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold transition-all';
-        current.style.boxShadow = ''; // Let CSS control the shadow
+        // Tistory generates a SPAN for the current page; style it explicitly using Tailwind
+        current.className = 'selected w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-bgBody text-sm font-bold shadow-[0_0_15px_-5px_#2dd4bf] transition-all';
     }
 }
 

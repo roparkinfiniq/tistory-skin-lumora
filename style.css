@@ -424,31 +424,6 @@ figure[data-ke-type="opengraph"] .og-host {
     opacity: 1;
 }
 
-.pagination .no-more-prev,
-.pagination .no-more-next {
-    display: none !important;
-}
-
-.pagination .selected,
-.pagination .current {
-    background: var(--accent-color) !important;
-    color: var(--bg-body) !important;
-    border: 1px solid var(--accent-color) !important;
-    box-shadow: var(--shadow-glow) !important;
-    /* Force Mint Green Glow */
-    font-weight: 700;
-}
-
-/* 호버 시에만 테마색(민트) 빛(glow)이 나도록 설정 */
-.pagination a:hover,
-.pagination span:hover {
-    background: var(--bg-surface-hover) !important;
-    color: #ffffff !important;
-    border-color: var(--accent-color) !important;
-    box-shadow: var(--shadow-glow) !important;
-    /* 테마색(민트) 글로우 */
-}
-
 /* =========================================
    6. Search Input Design (Global)
    ========================================= */
