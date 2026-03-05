@@ -38,7 +38,7 @@ function toggleSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Script v60 Loaded'); // Updated Version
+    console.log('Script v61 Loaded'); // Updated Version
 
     // 0. Format Dates (Remove Time) - Run First
     formatDates();
@@ -223,12 +223,14 @@ function initPersistentFeatures() {
     // Initial Run
     initTOC();
     styleCategories();
+    stylePagination();
 
     // Retry every 500ms for 3 seconds
     let attempts = 0;
     const interval = setInterval(() => {
         attempts++;
         styleCategories();
+        stylePagination();
         fixGuestbookGrid();
         initSubscribeButton();
         updateCommentAvatars(); // Retry avatar update as well
@@ -504,7 +506,27 @@ function styleCategories() {
     });
 }
 
+// 3. Style Pagination
+function stylePagination() {
+    const pagination = document.querySelector('.pagination');
+    if (!pagination) return;
+    if (pagination.dataset.processed) return;
+    pagination.dataset.processed = "true";
 
+    const links = pagination.querySelectorAll('a');
+    links.forEach(link => {
+        link.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 text-sm hover:bg-zinc-800 hover:text-white hover:border-accent/30 transition-all';
+        if (link.classList.contains('selected')) {
+            link.classList.add('bg-accent', 'text-white', 'border-accent');
+        }
+    });
+
+    const current = pagination.querySelector('.selected');
+    if (current && current.tagName === 'SPAN') {
+        current.className = 'selected w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold transition-all';
+        current.style.boxShadow = ''; // Let CSS control the shadow
+    }
+}
 
 // 5. Layout Manager
 function checkLayout() {

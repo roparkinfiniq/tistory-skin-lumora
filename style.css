@@ -440,19 +440,10 @@ figure[data-ke-type="opengraph"] .og-host {
 .pagination a,
 .pagination span {
     pointer-events: auto;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-medium);
-    color: var(--text-secondary);
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .pagination .no-more-prev,
