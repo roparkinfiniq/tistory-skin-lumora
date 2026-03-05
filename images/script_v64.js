@@ -38,7 +38,7 @@ function toggleSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Script v63 Loaded'); // Updated Version
+    console.log('Script v64 Loaded'); // Updated Version
 
     // 0. Format Dates (Remove Time) - Run First
     formatDates();
@@ -403,7 +403,8 @@ function styleCategories() {
             const { name: categoryName, count: countText } = parseCategoryLink(link);
 
             const linkHref = link.getAttribute('href');
-            const isActive = linkHref && (decodeURIComponent(linkHref) === currentPath || (linkHref === '/category' && currentPath === '/category'));
+            const isHome = currentPath === '/' || currentPath === '';
+            const isActive = linkHref && (decodeURIComponent(linkHref) === currentPath || (linkHref === '/category' && (currentPath === '/category' || isHome)));
 
             // Rebuild Link
             link.innerHTML = '';
