@@ -414,19 +414,6 @@ figure[data-ke-type="opengraph"] .og-host {
 /* =========================================
    3. Pagination Design
    ========================================= */
-.pagination {
-    position: relative !important;
-    /* Flow naturally after content */
-    margin-top: 60px !important;
-    /* Space from content */
-    margin-bottom: 40px !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 8px;
-    z-index: 10;
-}
-
 /* Anti-Flicker Cloak */
 .cloak-until-loaded {
     opacity: 0;
@@ -435,15 +422,6 @@ figure[data-ke-type="opengraph"] .og-host {
 
 .cloak-until-loaded.loaded {
     opacity: 1;
-}
-
-.pagination a,
-.pagination span {
-    pointer-events: auto;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s ease;
 }
 
 .pagination .no-more-prev,
