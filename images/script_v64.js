@@ -1,4 +1,4 @@
-﻿
+
 // Mobile Menu Toggle
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
@@ -38,13 +38,10 @@ function toggleSearch() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Script v56 Loaded'); // Updated Version
+    console.log('Script v64 Loaded'); // Updated Version
 
     // 0. Format Dates (Remove Time) - Run First
     formatDates();
-
-    // 1. Run Layout Check immediately
-    checkLayout();
 
     // 2. Fix Guestbook Grid
     fixGuestbookGrid();
@@ -406,7 +403,8 @@ function styleCategories() {
             const { name: categoryName, count: countText } = parseCategoryLink(link);
 
             const linkHref = link.getAttribute('href');
-            const isActive = linkHref && (decodeURIComponent(linkHref) === currentPath || (linkHref === '/category' && currentPath === '/category'));
+            const isHome = currentPath === '/' || currentPath === '';
+            const isActive = linkHref && (decodeURIComponent(linkHref) === currentPath || (linkHref === '/category' && (currentPath === '/category' || isHome)));
 
             // Rebuild Link
             link.innerHTML = '';
@@ -513,19 +511,18 @@ function stylePagination() {
     if (pagination.dataset.processed) return;
     pagination.dataset.processed = "true";
 
-    pagination.classList.add('flex', 'justify-center', 'items-center', 'gap-2', 'mt-12', 'mb-20');
-
     const links = pagination.querySelectorAll('a');
     links.forEach(link => {
         link.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 text-sm hover:bg-zinc-800 hover:text-white hover:border-accent/30 transition-all';
         if (link.classList.contains('selected')) {
-            link.classList.add('bg-accent', 'text-white', 'border-accent');
+            link.classList.add('bg-accent', 'text-bgBody', 'border-accent');
         }
     });
 
     const current = pagination.querySelector('.selected');
     if (current && current.tagName === 'SPAN') {
-        current.className = 'w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-white text-sm font-bold shadow-[0_0_15px_-5px_#14b8a6]';
+        // Tistory generates a SPAN for the current page; style it explicitly using Tailwind
+        current.className = 'selected w-8 h-8 flex items-center justify-center rounded-lg bg-accent border border-accent text-bgBody text-sm font-bold shadow-[0_0_15px_-5px_#2dd4bf] transition-all';
     }
 }
 

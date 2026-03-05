@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -75,7 +75,7 @@
             class="fixed top-[-20%] left-[-10%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0">
         </div>
         <div
-            class="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-accentBlue/5 rounded-full blur-[120px] pointer-events-none z-0">
+            class="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0">
         </div>
 
         <!-- Header -->
@@ -217,32 +217,38 @@
                         </s_sidebar_element>
 
                         <s_sidebar_element>
-                            <!-- Visitor Stats Widget (Minimal) -->
-                            <div class="mb-12 relative group pointer-events-none">
-                                <div class="px-2 flex items-center justify-between mb-4">
-                                    <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-chart-line text-xs text-accent opacity-80"></i>
-                                        <span
-                                            class="text-xs font-bold text-zinc-500 uppercase tracking-widest font-mono">Visits</span>
+                            <!-- Visitor Stats Widget (Detailed Card Design) -->
+                            <div
+                                class="mb-10 relative group bg-bgCard border border-white/5 rounded-2xl p-5 hover:border-white/10 hover:shadow-lg hover:shadow-black/50 transition-all duration-300 pointer-events-auto mx-1">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center border border-accent/20 text-accent group-hover:bg-accent group-hover:text-bgBody group-hover:shadow-[0_0_15px_-3px_rgba(20,184,166,0.5)] transition-all duration-300">
+                                        <i class="fa-solid fa-chart-line text-xs"></i>
                                     </div>
+                                    <span
+                                        class="text-xs font-bold text-zinc-400 uppercase tracking-[0.15em] font-mono">Visits</span>
                                 </div>
-                                <div class="px-2">
-                                    <div class="flex items-baseline gap-3 mb-2">
-                                        <span
-                                            class="text-3xl font-bold text-white font-mono tracking-tight group-hover:text-accent transition-colors duration-300">
-                                            <span class="count-animate">[##_count_total_##]</span>
-                                        </span>
+
+                                <div class="mb-5 pl-1 flex items-baseline gap-1.5">
+                                    <span
+                                        class="text-3xl font-bold text-white font-mono tracking-tight group-hover:text-accent transition-colors duration-300 drop-shadow-sm leading-none flex items-center">
+                                        <span class="count-animate">[##_count_total_##]</span>
+                                    </span>
+                                    <span
+                                        class="text-[10px] text-zinc-500 font-medium font-mono uppercase tracking-widest pt-1">Total</span>
+                                </div>
+
+                                <div class="flex items-center text-[10.5px] font-mono border-t border-white/5 pt-4">
+                                    <div class="flex-1 flex flex-col gap-1 pr-3 border-r border-white/5">
+                                        <span class="text-zinc-500 uppercase tracking-widest leading-none">Today</span>
+                                        <strong class="text-zinc-200 text-sm leading-none font-medium"><span
+                                                class="count-animate">[##_count_today_##]</span></strong>
                                     </div>
-                                    <div class="flex items-center gap-4 text-[11px] font-mono uppercase text-zinc-500">
+                                    <div class="flex-1 flex flex-col gap-1 pl-4">
                                         <span
-                                            class="flex items-center gap-1.5 hover:text-accentBlue transition-colors pointer-events-auto">
-                                            Today <strong class="text-zinc-300 ml-0.5"><span
-                                                    class="count-animate">[##_count_today_##]</span></strong>
-                                        </span>
-                                        <span class="flex items-center gap-1.5 pointer-events-auto">
-                                            Yesterday <strong class="text-zinc-400 ml-0.5"><span
-                                                    class="count-animate">[##_count_yesterday_##]</span></strong>
-                                        </span>
+                                            class="text-zinc-500 uppercase tracking-widest leading-none">Yesterday</span>
+                                        <strong class="text-zinc-500 text-sm leading-none font-medium"><span
+                                                class="count-animate">[##_count_yesterday_##]</span></strong>
                                     </div>
                                 </div>
                             </div>
@@ -270,6 +276,34 @@
                 <!-- Main Content Area -->
                 <main
                     class="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 content-start">
+                    <!-- FOUC Prevention Script -> Synchronous Execution Before Paint -->
+                    <script>
+                        (function () {
+                            const path = window.location.pathname;
+                            let isDetail = document.getElementById('view-indicator-detail') !== null;
+                            if (!isDetail && (path.includes('/entry/') || /^\/(\d+|m\/entry\/)/.test(path) || path.includes('/guestbook'))) {
+                                isDetail = true;
+                            }
+                            if (isDetail) {
+                                const sidebar = document.getElementById('sidebar-desktop');
+                                const mainLayout = document.getElementById('main-layout');
+                                const mainContent = document.querySelector('main');
+
+                                if (sidebar) {
+                                    sidebar.classList.remove('lg:block');
+                                    sidebar.style.setProperty('display', 'none', 'important');
+                                }
+                                if (mainLayout) {
+                                    mainLayout.classList.remove('lg:flex-row', 'gap-12');
+                                    mainLayout.classList.add('justify-center');
+                                }
+                                if (mainContent) {
+                                    mainContent.classList.remove('md:grid-cols-2', 'xl:grid-cols-3', 'xl:gap-8');
+                                    mainContent.classList.add('w-full', 'max-w-4xl', 'mx-auto');
+                                }
+                            }
+                        })();
+                    </script>
 
                     <!-- Feature: List Header (Search/Category Results) -->
                     <s_list>
@@ -472,7 +506,7 @@
                                         <s_article_prev_next>
                                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mt-8 font-sans">
                                                 <!-- Previous Post Container -->
-                                                <div class="w-full">
+                                                <div id="prev-post-container" class="w-full">
                                                     <s_article_prev>
                                                         <a href="[##_article_prev_link_##]"
                                                             class="nav-card group relative overflow-hidden rounded-2xl bg-[#18181b] border border-white/5 p-6 flex flex-col justify-center min-h-[140px] transition-all duration-300 hover:border-[#14b8a6]/50 hover:shadow-xl hover:shadow-[#14b8a6]/10">
@@ -502,7 +536,7 @@
                                                 </div>
 
                                                 <!-- Next Post Container -->
-                                                <div class="w-full">
+                                                <div id="next-post-container" class="w-full">
                                                     <s_article_next>
                                                         <a href="[##_article_next_link_##]"
                                                             class="nav-card group relative overflow-hidden rounded-2xl bg-[#18181b] border border-white/5 p-6 flex flex-col justify-center items-end text-right min-h-[140px] transition-all duration-300 hover:border-[#14b8a6]/50 hover:shadow-xl hover:shadow-[#14b8a6]/10">
@@ -532,6 +566,20 @@
                                                 </div>
                                             </div>
                                             <!-- </s_article_prev_next> -->
+                                            <script>
+                                                // Fallback for empty prev/next post slots
+                                                // Using JS because Tistory parser might leave whitespace, defeating CSS :empty
+                                                (function () {
+                                                    var prevContainer = document.getElementById('prev-post-container');
+                                                    var nextContainer = document.getElementById('next-post-container');
+                                                    if (prevContainer && prevContainer.innerHTML.trim() === '') {
+                                                        prevContainer.classList.add('empty-nav');
+                                                    }
+                                                    if (nextContainer && nextContainer.innerHTML.trim() === '') {
+                                                        nextContainer.classList.add('empty-nav');
+                                                    }
+                                                })();
+                                            </script>
 
                                             <!-- Tags moved to header -->
 
@@ -805,7 +853,7 @@
                     <!-- Input Form Moved Below -->
 
                     <!-- Guestbook List -->
-                    <div id="guestbook-list" class="max-w-3xl mx-auto w-full flex flex-col gap-6">
+                    <div id="guestbook-list" class="max-w-3xl mx-auto w-full flex flex-col gap-6 mb-12">
                         <s_guest_container>
                             <s_guest_rep>
                                 <div id="[##_guest_rep_id_##]"
@@ -909,20 +957,20 @@
                 </div>
             </s_page_rep>
 
-            <!-- Paging -->
             <s_paging>
-                <div class="col-span-full pagination flex justify-center items-center gap-2 mt-12 mb-20">
+                <div
+                    class="col-span-full pagination cloak-until-loaded flex justify-center items-center gap-2 mt-12 mb-20">
                     <a [##_prev_page_##]
-                        class="[##_no_more_prev_##] w-10 h-10 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all">
-                        <i class="fa-solid fa-chevron-left"></i>
+                        class="[##_no_more_prev_##] w-8 h-8 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all text-sm">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
                     </a>
                     <s_paging_rep>
                         <a [##_paging_rep_link_##]
-                            class="w-10 h-10 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 hover:bg-accent hover:border-accent hover:text-white transition-all">[##_paging_rep_link_num_##]</a>
+                            class="w-8 h-8 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 hover:bg-accent hover:border-accent hover:text-white transition-all text-sm">[##_paging_rep_link_num_##]</a>
                     </s_paging_rep>
                     <a [##_next_page_##]
-                        class="[##_no_more_next_##] w-10 h-10 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all">
-                        <i class="fa-solid fa-chevron-right"></i>
+                        class="[##_no_more_next_##] w-8 h-8 flex items-center justify-center rounded-lg bg-bgCard border border-white/5 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all text-sm">
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
                     </a>
                 </div>
             </s_paging>
@@ -1323,7 +1371,7 @@
             });
         </script>
         <!-- Custom Script (Versioning) -->
-        <script src="./images/script_v56.js"></script>
+        <script src="./images/script_v64.js"></script>
     </s_t3>
 </body>
 
