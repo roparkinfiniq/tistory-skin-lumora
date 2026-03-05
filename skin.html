@@ -75,7 +75,7 @@
             class="fixed top-[-20%] left-[-10%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0">
         </div>
         <div
-            class="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-accentBlue/5 rounded-full blur-[120px] pointer-events-none z-0">
+            class="fixed bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] pointer-events-none z-0">
         </div>
 
         <!-- Header -->
@@ -553,17 +553,18 @@
                                                     <s_rp_input_form>
                                                         <!-- Guests: Login Prompt (Activated by style tag in s_rp_guest) -->
                                                         <div
-                                                            class="guest-login-prompt hidden bg-[#27272a] rounded-2xl p-12 border border-white/5 border-dashed flex-col items-center justify-center text-center gap-4 mb-12">
+                                                            class="guest-login-prompt hidden bg-[#27272a] rounded-2xl py-8 px-6 border border-white/5 border-dashed flex-col items-center justify-center text-center gap-2 mb-12">
                                                             <div
-                                                                class="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-2xl mb-2 mx-auto">
+                                                                class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-xl mx-auto">
                                                                 <i class="fa-solid fa-lock"></i>
                                                             </div>
                                                             <h3 class="text-xl font-bold text-zinc-300">Login Required
                                                             </h3>
-                                                            <p class="text-zinc-500 text-sm mb-4">댓글을 작성하려면 로그인이 필요합니다.
+                                                            <p class="text-zinc-500 text-sm mb-2 mt-1">댓글을 작성하려면 로그인이
+                                                                필요합니다.
                                                             </p>
                                                             <a href="https://www.tistory.com/auth/login"
-                                                                class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors border border-white/10 flex items-center justify-center gap-2 w-fit mx-auto">
+                                                                class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors border border-white/10 flex items-center justify-center gap-2 w-fit mx-auto mt-2">
                                                                 <span>로그인하러 가기</span>
                                                                 <i class="fa-solid fa-arrow-right text-xs"></i>
                                                             </a>
@@ -652,13 +653,15 @@
                                                                                 class="w-10 h-10 rounded-full object-cover border border-white/10 [##_rp_rep_class_##]-avatar">
                                                                         </div>
                                                                         <!-- Content -->
-                                                                        <div class="flex-1">
-                                                                            <div class="flex items-baseline gap-3 mb-1">
+                                                                        <!-- Content -->
+                                                                        <div class="flex-1 min-w-0">
+                                                                            <div
+                                                                                class="flex items-baseline gap-3 mb-1 flex-wrap">
                                                                                 <span
-                                                                                    class="text-[0.95rem] font-bold text-zinc-200 cursor-pointer hover:underline"
+                                                                                    class="text-[0.95rem] font-bold text-zinc-200 cursor-pointer hover:underline line-clamp-2 break-all"
                                                                                     onclick="[##_rp_rep_onclick_dropdown_##]">[##_rp_rep_name_##]</span>
                                                                                 <span
-                                                                                    class="text-xs text-zinc-600 font-mono">[##_rp_rep_date_##]</span>
+                                                                                    class="text-xs text-zinc-600 font-mono shrink-0">[##_rp_rep_date_##]</span>
                                                                             </div>
 
                                                                             <div
@@ -689,13 +692,13 @@
                                                                                             <img src="[##_rp_rep_logo_##]"
                                                                                                 class="w-9 h-9 rounded-full object-cover border border-white/10 [##_rp_rep_class_##]-avatar">
                                                                                         </div>
-                                                                                        <div class="flex-1">
+                                                                                        <div class="flex-1 min-w-0">
                                                                                             <div
-                                                                                                class="flex items-center gap-2 mb-1">
+                                                                                                class="flex items-baseline gap-2 mb-1 flex-wrap">
                                                                                                 <span
-                                                                                                    class="text-sm font-bold text-zinc-200">[##_rp_rep_name_##]</span>
+                                                                                                    class="text-sm font-bold text-zinc-200 line-clamp-2 break-all">[##_rp_rep_name_##]</span>
                                                                                                 <span
-                                                                                                    class="text-xs text-zinc-600 font-mono">[##_rp_rep_date_##]</span>
+                                                                                                    class="text-xs text-zinc-600 font-mono shrink-0">[##_rp_rep_date_##]</span>
                                                                                             </div>
                                                                                             <div
                                                                                                 class="text-sm text-zinc-300 leading-relaxed mb-2">
@@ -817,13 +820,13 @@
                                         </div>
 
                                         <div class="flex-1 min-w-0">
-                                            <div class="flex items-center gap-3 mb-1">
+                                            <div class="flex items-baseline gap-3 mb-1 flex-wrap">
                                                 <span
-                                                    class="text-zinc-200 font-bold hover:text-accent transition-colors cursor-pointer">
+                                                    class="text-zinc-200 font-bold hover:text-accent transition-colors cursor-pointer line-clamp-2 break-all">
                                                     [##_guest_rep_name_##]
                                                 </span>
                                                 <span
-                                                    class="text-xs text-zinc-500 font-mono">[##_guest_rep_date_##]</span>
+                                                    class="text-xs text-zinc-500 font-mono shrink-0">[##_guest_rep_date_##]</span>
                                             </div>
 
                                             <div
@@ -877,15 +880,15 @@
                             <!-- Guests: Login Prompt -->
                             <s_guest_guest>
                                 <div
-                                    class="bg-[#27272a] rounded-2xl p-12 border border-white/5 border-dashed flex flex-col items-center justify-center text-center gap-4">
+                                    class="bg-[#27272a] rounded-2xl py-8 px-6 border border-white/5 border-dashed flex flex-col items-center justify-center text-center gap-2">
                                     <div
-                                        class="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-2xl mb-2">
+                                        class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-xl">
                                         <i class="fa-solid fa-lock"></i>
                                     </div>
                                     <h3 class="text-xl font-bold text-zinc-300">Login Required</h3>
-                                    <p class="text-zinc-500 text-sm mb-4">방명록을 작성하려면 로그인이 필요합니다.</p>
+                                    <p class="text-zinc-500 text-sm mb-2 mt-1">방명록을 작성하려면 로그인이 필요합니다.</p>
                                     <a href="https://www.tistory.com/auth/login"
-                                        class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors border border-white/10 flex items-center gap-2">
+                                        class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors border border-white/10 flex items-center gap-2 mt-2">
                                         <span>로그인하러 가기</span>
                                         <i class="fa-solid fa-arrow-right text-xs"></i>
                                     </a>

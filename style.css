@@ -47,7 +47,6 @@
 .tt_toolbar_container,
 .plugin_author,
 div[data-tistory-react-app="Namecard"],
-.tt_adsense_bottom,
 #tistorytoolbarid,
 .tt_menubar,
 #kakaoWrap #kakaoHead,
@@ -216,6 +215,117 @@ code,
     margin: 1.5em 0;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                        Tistory Image Caption Styling                       */
+/* -------------------------------------------------------------------------- */
+.prose figure figcaption,
+.prose figcaption,
+figure[data-ke-type="image"] figcaption,
+figure.imageblock figcaption,
+figure.imagegridblock figcaption,
+.tt_article_useless_p_margin figcaption,
+.tt_article_useless_p_margin .cap1 {
+    font-size: 0.75rem !important;
+    /* Smaller than Body 3 (size14 = 0.875rem) */
+    color: var(--text-muted) !important;
+    margin-top: 0.25rem !important;
+    /* Pull aggressively closer to the image */
+    padding-top: 0 !important;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                        Tistory Typography Overrides                        */
+/* -------------------------------------------------------------------------- */
+/* 1. Bold (볼드) - Reset Tailwind override */
+.prose b,
+.prose strong,
+.tt_article_useless_p_margin b,
+.tt_article_useless_p_margin strong,
+p[data-ke-size] b,
+p[data-ke-size] strong {
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    /* Make it pop in dark mode */
+}
+
+/* 2. Italic (기울임꼴) */
+.prose i,
+.prose em,
+.tt_article_useless_p_margin i,
+.tt_article_useless_p_margin em {
+    font-style: italic !important;
+}
+
+/* 3. Underline (밑줄) */
+.prose u,
+.tt_article_useless_p_margin u {
+    text-decoration: underline !important;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--accent-color) !important;
+    /* Mint underline */
+}
+
+/* 4. Strikethrough (취소선) */
+.prose s,
+.prose strike,
+.prose del,
+.tt_article_useless_p_margin s,
+.tt_article_useless_p_margin strike,
+.tt_article_useless_p_margin del {
+    text-decoration: line-through !important;
+    text-decoration-color: var(--text-tertiary) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* 5. Tistory Body Sizes (본문 1, 2, 3) */
+/* 본문 1 (큰 크기 - size18/size20) */
+.prose p[data-ke-size="size18"],
+.tt_article_useless_p_margin p[data-ke-size="size18"],
+.prose p[data-ke-size="size20"],
+.tt_article_useless_p_margin p[data-ke-size="size20"] {
+    font-size: 1.15rem !important;
+    line-height: 1.8 !important;
+    color: var(--text-primary) !important;
+}
+
+/* 본문 2 (기본 크기 - size16) */
+.prose p[data-ke-size="size16"],
+.tt_article_useless_p_margin p[data-ke-size="size16"] {
+    font-size: 1.0rem !important;
+    line-height: 1.7 !important;
+}
+
+/* 본문 3 (작은 크기 - size14) */
+.prose p[data-ke-size="size14"],
+.tt_article_useless_p_margin p[data-ke-size="size14"] {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Headings Contrast Fixes */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.tt_article_useless_p_margin h1,
+.tt_article_useless_p_margin h2,
+.tt_article_useless_p_margin h3,
+.tt_article_useless_p_margin h4 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+}
+
+.prose h2,
+.tt_article_useless_p_margin h2 {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 14px;
+}
+
 /* Tistory Editor Table Overrides for Dark Mode */
 .prose table,
 .prose table * {
@@ -304,9 +414,6 @@ figure[data-ke-type="opengraph"] .og-host {
 /* =========================================
    3. Pagination Design
    ========================================= */
-/* =========================================
-   3. Pagination Design
-   ========================================= */
 .pagination {
     position: relative !important;
     /* Flow naturally after content */
@@ -348,19 +455,26 @@ figure[data-ke-type="opengraph"] .og-host {
 
 .pagination .selected,
 .pagination .current {
-    background: var(--accent-color);
-    color: var(--bg-body);
-    /* 배경색을 텍스트로 써서 대비 극대화 */
+    background: transparent !important;
+    color: var(--accent-color) !important;
+    border: 1px solid var(--accent-color) !important;
+    box-shadow: none !important;
+    /* 기본 상태에서는 빛이 나지 않도록 제거 */
     font-weight: 700;
 }
 
-.pagination a:hover:not(.selected) {
-    background: var(--border-medium);
-    color: var(--text-primary);
+/* 호버 시에만 테마색(민트) 빛(glow)이 나도록 설정 */
+.pagination a:hover,
+.pagination span:hover {
+    background: var(--bg-surface-hover) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: var(--shadow-glow) !important;
+    /* 테마색(민트) 글로우 */
 }
 
 /* =========================================
-   4. FOUC Prevention (Fade-In Animation)
+   6. Search Input Design (Global)
    ========================================= */
 /* 4. FOUC Prevention (JS-Triggered Fade-In) */
 #sidebar-desktop,
@@ -921,9 +1035,6 @@ figure[data-ke-type="opengraph"] .og-host::before {
     border-color: var(--accent-color) !important;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                          Blockquote / Quote Styling                        */
-/* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /*                          Blockquote / Quote Styling                        */
 /* -------------------------------------------------------------------------- */
