@@ -440,12 +440,14 @@ figure[data-ke-type="opengraph"] .og-host {
 .pagination a,
 .pagination span {
     pointer-events: auto;
-    padding: 8px 14px;
-    /* 더 편안한 클릭 영역 */
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
-    /* 통일된 곡률 */
-    background: transparent;
-    /* 배경 날리고 텍스트만 */
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
     color: var(--text-secondary);
     font-size: 14px;
     font-weight: 500;
@@ -453,13 +455,18 @@ figure[data-ke-type="opengraph"] .og-host {
     transition: all 0.2s ease;
 }
 
+.pagination .no-more-prev,
+.pagination .no-more-next {
+    display: none !important;
+}
+
 .pagination .selected,
 .pagination .current {
-    background: transparent !important;
-    color: var(--accent-color) !important;
+    background: var(--accent-color) !important;
+    color: var(--bg-body) !important;
     border: 1px solid var(--accent-color) !important;
-    box-shadow: none !important;
-    /* 기본 상태에서는 빛이 나지 않도록 제거 */
+    box-shadow: var(--shadow-glow) !important;
+    /* Force Mint Green Glow */
     font-weight: 700;
 }
 
