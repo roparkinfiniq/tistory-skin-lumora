@@ -35,5 +35,33 @@
 			<type>STRING</type>
 			<default>https://github.com/roparkinfiniq/tistory-skin-lumora</default>
 		</variable>
+		<variable>
+			<name>instagram_url</name>
+			<label>Instagram 주소</label>
+			<description>인스타그램 주소를 입력하세요. (비워두면 숨김 처리)</description>
+			<type>STRING</type>
+			<default></default>
+		</variable>
+		<variable>
+			<name>twitter_url</name>
+			<label>Twitter(X) 주소</label>
+			<description>트위터(X) 주소를 입력하세요. (비워두면 숨김 처리)</description>
+			<type>STRING</type>
+			<default></default>
+		</variable>
+		<variable>
+			<name>contact_email</name>
+			<label>연락처 이메일</label>
+			<description>문의를 받을 이메일 주소를 입력하세요. (비워두면 숨김 처리)</description>
+			<type>STRING</type>
+			<default>raonepark@gmail.com</default>
+		</variable>
+		<variable>
+			<name>footer_text</name>
+			<label>푸터 하단 문구</label>
+			<description>블로그 최하단에 표시될 카피라이트 문구를 입력하세요.</description>
+			<type>STRING</type>
+			<default>Designed with Lumora Essential Dark Theme.</default>
+		</variable>
 	</variables>
 </skin>
