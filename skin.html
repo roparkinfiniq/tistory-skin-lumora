@@ -403,7 +403,7 @@
                                 <div class="relative flex justify-center">
                                     <!-- Table of Contents (TOC) Container -->
                                     <aside id="toc-container"
-                                        class="hidden xl:block absolute right-[-240px] top-0 w-52 shrink-0 z-20">
+                                        class="hidden xl:block absolute right-[-240px] top-0 h-full w-52 shrink-0 z-20">
                                     </aside>
 
                                     <!-- Main Article Content -->
@@ -789,11 +789,6 @@
                                 </s_rp>
                                 </article>
 
-                                <!-- Right Sidebar: Table of Contents (Placeholder) -->
-                                <aside id="toc-container"
-                                    class="hidden xl:block absolute left-[100%] ml-12 top-0 w-64 z-50">
-                                    <!-- JS will populate this -->
-                                </aside>
                             </div>
 
                             <!-- End of Content Container -->
@@ -1245,104 +1240,7 @@
                         }, 1500); // Slight delay to ensure Tistory JS renders the like button status
 
                         // ---------------------------------------------------------
-                        // TOC Sticky & Scroll Spy Logic
-                        // ---------------------------------------------------------
-                        // ---------------------------------------------------------
-                        // TOC Sticky & Scroll Spy Logic
-                        // ---------------------------------------------------------
-                        (function () {
-                            const tocContainer = document.getElementById('toc-container');
-                            // Make sure we are on a permalink page (article container exists)
-                            const articleContainer = document.querySelector('.col-span-full.relative.min-h-screen');
 
-                            if (!tocContainer || !articleContainer) return;
-
-                            // Helper: Throttle via rAF
-                            let ticking = false;
-
-                            // 1. Sticky Metrics & Logic
-                            function onScrollSticky() {
-                                // Only apply if visible (XL breakpoint is 1280px)
-                                if (window.innerWidth < 1280 || window.getComputedStyle(tocContainer).display === 'none') {
-                                    tocContainer.style.top = '0px';
-                                    return;
-                                }
-
-                                const scrollTop = window.scrollY || document.documentElement.scrollTop;
-                                // Note: getBoundingClientRect causes reflow, but inside rAF it's managed.
-                                // Ideally we cache articleTopAbs on resize, but this is acceptable for now.
-                                const articleRect = articleContainer.getBoundingClientRect();
-                                const articleTopAbs = scrollTop + articleRect.top;
-
-                                // Offset: stick at top: 100px relative to viewport
-                                let newTop = (scrollTop + 100) - articleTopAbs;
-
-                                if (newTop < 0) newTop = 0;
-
-                                const tocHeight = tocContainer.offsetHeight;
-                                const limit = articleContainer.offsetHeight - tocHeight - 100;
-
-                                if (newTop > limit) newTop = limit;
-
-                                tocContainer.style.top = newTop + 'px';
-                            }
-
-                            // 2. Scroll Spy Logic
-                            const contentArea = articleContainer.querySelector('.tt_article_useless_p_margin') || articleContainer.querySelector('article');
-                            if (!contentArea) return;
-
-                            const headers = contentArea.querySelectorAll('h1, h2, h3, h4');
-                            const tocLinks = tocContainer.querySelectorAll('a');
-                            let lastActiveId = null;
-
-                            function onScrollSpy() {
-                                if (headers.length === 0 || tocLinks.length === 0) return;
-
-                                const scrollPos = (window.scrollY || document.documentElement.scrollTop) + 150; // Offset
-
-                                let currentId = null;
-                                // Find the last header we've scrolled past
-                                headers.forEach(header => {
-                                    if (header.offsetTop <= scrollPos) {
-                                        currentId = header.id;
-                                    }
-                                });
-
-                                // Only update DOM if the active section has CHANGED
-                                if (lastActiveId !== currentId) {
-                                    lastActiveId = currentId;
-
-                                    tocLinks.forEach(link => {
-                                        const href = link.getAttribute('href');
-                                        // Check if this link matches currentId
-                                        if (href && currentId && href.includes(currentId)) {
-                                            link.classList.add('active', 'text-accent', 'font-bold');
-                                            link.classList.remove('text-zinc-400', 'font-normal');
-                                        } else {
-                                            link.classList.remove('active', 'text-accent', 'font-bold');
-                                            link.classList.add('text-zinc-400', 'font-normal');
-                                        }
-                                    });
-                                }
-                            }
-
-                            // Unified Scroll Handler using rAF
-                            function onScroll() {
-                                if (!ticking) {
-                                    window.requestAnimationFrame(() => {
-                                        onScrollSticky();
-                                        onScrollSpy();
-                                        ticking = false;
-                                    });
-                                    ticking = true;
-                                }
-                            }
-
-                            window.addEventListener('scroll', onScroll, { passive: true });
-                            // Initial Call
-                            onScrollSticky();
-                            onScrollSpy();
-                        })();
 
                     });
                 } catch (e) {
