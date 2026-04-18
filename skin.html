@@ -503,9 +503,8 @@
                                         </div>
 
                                         <!-- Previous / Next Post Navigation -->
-                                        <s_article_prev_next>
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mt-8 font-sans">
-                                                <!-- Previous Post Container -->
+                                        <div id="prev-next-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mt-8 font-sans">
+                                            <!-- Previous Post Container -->
                                                 <div id="prev-post-container" class="w-full">
                                                     <s_article_prev>
                                                         <a href="[##_article_prev_link_##]"
@@ -565,18 +564,33 @@
                                                     </s_article_next>
                                                 </div>
                                             </div>
-                                            <!-- </s_article_prev_next> -->
                                             <script>
                                                 // Fallback for empty prev/next post slots
                                                 // Using JS because Tistory parser might leave whitespace, defeating CSS :empty
                                                 (function () {
+                                                    var grid = document.getElementById('prev-next-grid');
                                                     var prevContainer = document.getElementById('prev-post-container');
                                                     var nextContainer = document.getElementById('next-post-container');
-                                                    if (prevContainer && prevContainer.innerHTML.trim() === '') {
-                                                        prevContainer.classList.add('empty-nav');
-                                                    }
-                                                    if (nextContainer && nextContainer.innerHTML.trim() === '') {
-                                                        nextContainer.classList.add('empty-nav');
+                                                    var prevEmpty = prevContainer && prevContainer.innerHTML.trim() === '';
+                                                    var nextEmpty = nextContainer && nextContainer.innerHTML.trim() === '';
+                                                    
+                                                    if (prevEmpty && nextEmpty) {
+                                                        if (grid) grid.classList.add('hidden');
+                                                    } else {
+                                                        if (prevEmpty && prevContainer) {
+                                                            prevContainer.classList.add('hidden');
+                                                            if (nextContainer && !nextEmpty) {
+                                                                nextContainer.classList.remove('md:col-span-1');
+                                                                nextContainer.classList.add('md:col-span-2');
+                                                            }
+                                                        }
+                                                        if (nextEmpty && nextContainer) {
+                                                            nextContainer.classList.add('hidden');
+                                                            if (prevContainer && !prevEmpty) {
+                                                                prevContainer.classList.remove('md:col-span-1');
+                                                                prevContainer.classList.add('md:col-span-2');
+                                                            }
+                                                        }
                                                     }
                                                 })();
                                             </script>
