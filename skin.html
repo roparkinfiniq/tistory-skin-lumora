@@ -331,19 +331,108 @@
 
                     <!-- Protected Article Loop -->
                     <s_article_protected>
-                        <article
-                            class="col-span-1 md:col-span-2 xl:col-span-3 bg-bgCard rounded-card p-8 text-center border border-white/5 flex flex-col items-center justify-center gap-4">
-                            <i class="fa-solid fa-lock text-4xl text-zinc-600"></i>
-                            <h3 class="text-xl font-bold text-zinc-300">Protected Post</h3>
-                            <p class="text-zinc-500 text-sm mb-4">Enter the password to view this post.</p>
-                            <div class="flex gap-2">
-                                <input type="password" onkeydown="if (event.keyCode == 13) [##_article_dissolve_##]"
-                                    class="bg-bgBody border border-white/10 rounded-lg px-4 py-2 text-zinc-200 focus:border-accent outline-none"
-                                    placeholder="Password" />
-                                <button onclick="[##_article_dissolve_##]"
-                                    class="bg-accent hover:bg-accent/80 text-white px-4 py-2 rounded-lg font-bold transition-colors">Submit</button>
+                        <!-- List View (Displayed only on Index/Category pages) -->
+                        <div class="block [#tt-body-page_&]:hidden w-full">
+                            <article
+                                class="col-span-1 bg-bgCard rounded-card p-7 flex flex-col h-full min-h-[240px] cursor-pointer border border-white/5 hover:border-accent/40 hover:shadow-[0_0_20px_-5px_rgba(20,184,166,0.15)] transition-all duration-300 group relative overflow-hidden cloak-until-loaded"
+                                onclick="location.href='[##_article_rep_link_##]'">
+                                <!-- Decorative gradient blob on hover -->
+                                <div
+                                    class="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                                </div>
+
+                                <div class="relative z-10 flex-1 flex flex-col">
+                                    <div class="flex justify-between items-start mb-5">
+                                        <span
+                                            class="text-[11px] font-bold text-zinc-300 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                                            [##_article_rep_category_##]
+                                        </span>
+                                        <span
+                                            class="date-list text-xs text-zinc-500 font-mono tracking-tight group-hover:text-zinc-400 transition-colors">
+                                            [##_article_rep_date_##]
+                                        </span>
+                                    </div>
+
+                                    <h3
+                                        class="text-[1.35rem] font-bold mb-4 leading-snug text-gray-100 group-hover:text-white transition-colors break-keep">
+                                        [##_article_rep_title_##]
+                                    </h3>
+                                    
+                                    <p class="item-summary text-[15px] text-zinc-400 leading-relaxed break-keep font-light flex items-start gap-2">
+                                        <i class="fa-solid fa-lock text-zinc-500 text-sm mt-1"></i>
+                                        <span>보호되어 있는 글입니다. 클릭하여 비밀번호를 입력하세요.</span>
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Detail View (Displayed only on Permalink pages) -->
+                        <div class="hidden [#tt-body-page_&]:block w-full">
+                            <div id="view-indicator-detail" class="hidden"></div>
+                            <div class="col-span-full relative min-h-screen cloak-until-loaded">
+                                <!-- Top Navigation: Back Button -->
+                                <div class="mb-8 pt-2 animate-fadeIn flex justify-start">
+                                    <a href="[##_blog_link_##]"
+                                        class="group inline-flex items-center gap-3 text-sm text-textSub hover:text-white transition-colors px-2 py-2 rounded-lg hover:bg-white/5">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all shadow-md border border-white/5">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                        </div>
+                                        <span class="font-mono font-medium opacity-70 group-hover:opacity-100">Back to
+                                            List</span>
+                                    </a>
+                                </div>
+
+                                <div class="relative flex justify-center">
+                                    <!-- Main Article Content -->
+                                    <article class="animate-fadeIn w-full max-w-4xl pb-12 relative z-10">
+
+                                        <!-- Post Header -->
+                                        <header class="mb-2 px-0 text-left">
+                                            <div
+                                                class="flex flex-wrap items-center justify-start gap-3 text-xs md:text-sm font-mono text-zinc-400 mb-6">
+                                                <span
+                                                    class="bg-white/5 px-3 py-1 rounded-full border border-white/10 text-zinc-300">[##_article_rep_category_##]</span>
+                                                <span class="text-zinc-600">|</span>
+                                                <span class="date-detail text-textSub">[##_article_rep_date_##]</span>
+                                            </div>
+
+                                            <h1
+                                                class="text-[28px] md:text-3xl lg:text-4xl font-bold text-zinc-100 mb-4 !leading-[1.4] break-keep">
+                                                [##_article_rep_title_##]
+                                            </h1>
+                                        </header>
+
+                                        <!-- Divider -->
+                                        <div
+                                            class="h-px w-full bg-gradient-to-r from-transparent via-zinc-800 to-transparent mb-8">
+                                        </div>
+
+                                        <!-- Protected Content -->
+                                        <div
+                                            class="bg-bgCard/30 p-12 md:p-20 rounded-3xl border border-white/5 shadow-sm mb-8 flex flex-col items-center justify-center text-center">
+                                            <div
+                                                class="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mb-6 border border-white/10 shadow-lg">
+                                                <i class="fa-solid fa-lock text-2xl text-zinc-500"></i>
+                                            </div>
+                                            <h3 class="text-xl md:text-2xl font-bold text-zinc-200 mb-3">Protected Post
+                                            </h3>
+                                            <p class="text-zinc-400 text-sm md:text-base mb-8">보호되어 있는 글입니다.<br>내용을 보시려면
+                                                비밀번호를 입력하세요.</p>
+                                            <div class="flex flex-col sm:flex-row gap-3 w-full max-w-sm mx-auto">
+                                                <input type="password" id="[##_article_password_##]"
+                                                    name="[##_article_password_##]"
+                                                    onkeydown="if (event.keyCode == 13) [##_article_dissolve_##]"
+                                                    class="flex-1 bg-[#18181b] border border-white/10 rounded-xl px-5 py-3.5 text-zinc-200 focus:border-accent outline-none transition-colors shadow-inner w-full"
+                                                    placeholder="비밀번호 입력" />
+                                                <button onclick="[##_article_dissolve_##]"
+                                                    class="bg-accent hover:bg-accent/80 text-white px-6 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-accent/20 w-full sm:w-auto shrink-0">확인</button>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
                             </div>
-                        </article>
+                        </div>
                     </s_article_protected>
 
                     <!-- Main Article Loop (Index & Detail) -->
@@ -503,288 +592,289 @@
                                         </div>
 
                                         <!-- Previous / Next Post Navigation -->
-                                        <div id="prev-next-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mt-8 font-sans">
+                                        <div id="prev-next-grid"
+                                            class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mt-8 font-sans">
                                             <!-- Previous Post Container -->
-                                                <div id="prev-post-container" class="w-full">
-                                                    <s_article_prev>
-                                                        <a href="[##_article_prev_link_##]"
-                                                            class="nav-card group relative overflow-hidden rounded-2xl bg-[#18181b] border border-white/5 p-6 flex flex-col justify-center min-h-[140px] transition-all duration-300 hover:border-[#14b8a6]/50 hover:shadow-xl hover:shadow-[#14b8a6]/10">
-                                                            <!-- Hover Gradient -->
-                                                            <div
-                                                                class="absolute inset-0 bg-gradient-to-br from-[#14b8a6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                            </div>
+                                            <div id="prev-post-container" class="w-full">
+                                                <s_article_prev>
+                                                    <a href="[##_article_prev_link_##]"
+                                                        class="nav-card group relative overflow-hidden rounded-2xl bg-[#18181b] border border-white/5 p-6 flex flex-col justify-center min-h-[140px] transition-all duration-300 hover:border-[#14b8a6]/50 hover:shadow-xl hover:shadow-[#14b8a6]/10">
+                                                        <!-- Hover Gradient -->
+                                                        <div
+                                                            class="absolute inset-0 bg-gradient-to-br from-[#14b8a6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                        </div>
 
-                                                            <div class="relative z-10">
-                                                                <div class="flex items-center gap-2 mb-3">
-                                                                    <div
-                                                                        class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#14b8a6] group-hover:text-black transition-colors duration-300">
-                                                                        <i
-                                                                            class="fa-solid fa-arrow-left text-xs text-zinc-400 group-hover:text-black transition-colors"></i>
-                                                                    </div>
-                                                                    <span
-                                                                        class="text-xs font-bold text-zinc-500 uppercase tracking-wider group-hover:text-[#14b8a6] transition-colors">Previous
-                                                                        Post</span>
+                                                        <div class="relative z-10">
+                                                            <div class="flex items-center gap-2 mb-3">
+                                                                <div
+                                                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#14b8a6] group-hover:text-black transition-colors duration-300">
+                                                                    <i
+                                                                        class="fa-solid fa-arrow-left text-xs text-zinc-400 group-hover:text-black transition-colors"></i>
                                                                 </div>
-                                                                <h4
-                                                                    class="text-lg font-bold text-zinc-200 leading-snug line-clamp-2 group-hover:text-white transition-colors">
-                                                                    [##_article_prev_title_##]
-                                                                </h4>
+                                                                <span
+                                                                    class="text-xs font-bold text-zinc-500 uppercase tracking-wider group-hover:text-[#14b8a6] transition-colors">Previous
+                                                                    Post</span>
                                                             </div>
-                                                        </a>
-                                                    </s_article_prev>
-                                                </div>
-
-                                                <!-- Next Post Container -->
-                                                <div id="next-post-container" class="w-full">
-                                                    <s_article_next>
-                                                        <a href="[##_article_next_link_##]"
-                                                            class="nav-card group relative overflow-hidden rounded-2xl bg-[#18181b] border border-white/5 p-6 flex flex-col justify-center items-end text-right min-h-[140px] transition-all duration-300 hover:border-[#14b8a6]/50 hover:shadow-xl hover:shadow-[#14b8a6]/10">
-                                                            <!-- Hover Gradient -->
-                                                            <div
-                                                                class="absolute inset-0 bg-gradient-to-bl from-[#14b8a6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                            </div>
-
-                                                            <div class="relative z-10 flex flex-col items-end">
-                                                                <div class="flex items-center gap-2 mb-3">
-                                                                    <span
-                                                                        class="text-xs font-bold text-zinc-500 uppercase tracking-wider group-hover:text-[#14b8a6] transition-colors">Next
-                                                                        Post</span>
-                                                                    <div
-                                                                        class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#14b8a6] group-hover:text-black transition-colors duration-300">
-                                                                        <i
-                                                                            class="fa-solid fa-arrow-right text-xs text-zinc-400 group-hover:text-black transition-colors"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <h4
-                                                                    class="text-lg font-bold text-zinc-200 leading-snug line-clamp-2 group-hover:text-white transition-colors">
-                                                                    [##_article_next_title_##]
-                                                                </h4>
-                                                            </div>
-                                                        </a>
-                                                    </s_article_next>
-                                                </div>
+                                                            <h4
+                                                                class="text-lg font-bold text-zinc-200 leading-snug line-clamp-2 group-hover:text-white transition-colors">
+                                                                [##_article_prev_title_##]
+                                                            </h4>
+                                                        </div>
+                                                    </a>
+                                                </s_article_prev>
                                             </div>
-                                            <script>
-                                                // Fallback for empty prev/next post slots
-                                                // Using JS because Tistory parser might leave whitespace, defeating CSS :empty
-                                                (function () {
-                                                    var grid = document.getElementById('prev-next-grid');
-                                                    var prevContainer = document.getElementById('prev-post-container');
-                                                    var nextContainer = document.getElementById('next-post-container');
-                                                    var prevEmpty = prevContainer && prevContainer.innerHTML.trim() === '';
-                                                    var nextEmpty = nextContainer && nextContainer.innerHTML.trim() === '';
-                                                    
-                                                    if (prevEmpty && nextEmpty) {
-                                                        if (grid) grid.classList.add('hidden');
-                                                    } else {
-                                                        if (prevEmpty && prevContainer) {
-                                                            prevContainer.classList.add('hidden');
-                                                            if (nextContainer && !nextEmpty) {
-                                                                nextContainer.classList.remove('md:col-span-1');
-                                                                nextContainer.classList.add('md:col-span-2');
-                                                            }
-                                                        }
-                                                        if (nextEmpty && nextContainer) {
-                                                            nextContainer.classList.add('hidden');
-                                                            if (prevContainer && !prevEmpty) {
-                                                                prevContainer.classList.remove('md:col-span-1');
-                                                                prevContainer.classList.add('md:col-span-2');
-                                                            }
+
+                                            <!-- Next Post Container -->
+                                            <div id="next-post-container" class="w-full">
+                                                <s_article_next>
+                                                    <a href="[##_article_next_link_##]"
+                                                        class="nav-card group relative overflow-hidden rounded-2xl bg-[#18181b] border border-white/5 p-6 flex flex-col justify-center items-end text-right min-h-[140px] transition-all duration-300 hover:border-[#14b8a6]/50 hover:shadow-xl hover:shadow-[#14b8a6]/10">
+                                                        <!-- Hover Gradient -->
+                                                        <div
+                                                            class="absolute inset-0 bg-gradient-to-bl from-[#14b8a6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                        </div>
+
+                                                        <div class="relative z-10 flex flex-col items-end">
+                                                            <div class="flex items-center gap-2 mb-3">
+                                                                <span
+                                                                    class="text-xs font-bold text-zinc-500 uppercase tracking-wider group-hover:text-[#14b8a6] transition-colors">Next
+                                                                    Post</span>
+                                                                <div
+                                                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#14b8a6] group-hover:text-black transition-colors duration-300">
+                                                                    <i
+                                                                        class="fa-solid fa-arrow-right text-xs text-zinc-400 group-hover:text-black transition-colors"></i>
+                                                                </div>
+                                                            </div>
+                                                            <h4
+                                                                class="text-lg font-bold text-zinc-200 leading-snug line-clamp-2 group-hover:text-white transition-colors">
+                                                                [##_article_next_title_##]
+                                                            </h4>
+                                                        </div>
+                                                    </a>
+                                                </s_article_next>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            // Fallback for empty prev/next post slots
+                                            // Using JS because Tistory parser might leave whitespace, defeating CSS :empty
+                                            (function () {
+                                                var grid = document.getElementById('prev-next-grid');
+                                                var prevContainer = document.getElementById('prev-post-container');
+                                                var nextContainer = document.getElementById('next-post-container');
+                                                var prevEmpty = prevContainer && prevContainer.innerHTML.trim() === '';
+                                                var nextEmpty = nextContainer && nextContainer.innerHTML.trim() === '';
+
+                                                if (prevEmpty && nextEmpty) {
+                                                    if (grid) grid.classList.add('hidden');
+                                                } else {
+                                                    if (prevEmpty && prevContainer) {
+                                                        prevContainer.classList.add('hidden');
+                                                        if (nextContainer && !nextEmpty) {
+                                                            nextContainer.classList.remove('md:col-span-1');
+                                                            nextContainer.classList.add('md:col-span-2');
                                                         }
                                                     }
-                                                })();
-                                            </script>
+                                                    if (nextEmpty && nextContainer) {
+                                                        nextContainer.classList.add('hidden');
+                                                        if (prevContainer && !prevEmpty) {
+                                                            prevContainer.classList.remove('md:col-span-1');
+                                                            prevContainer.classList.add('md:col-span-2');
+                                                        }
+                                                    }
+                                                }
+                                            })();
+                                        </script>
 
-                                            <!-- Tags moved to header -->
+                                        <!-- Tags moved to header -->
 
 
 
 
 
 
-                                            <!-- Comments Custom Redesign -->
-                                            <s_rp>
-                                                <div id="comments-section" class="mt-12 max-w-4xl mx-auto">
-                                                    <!-- Header -->
-                                                    <div class="flex items-center gap-2 mb-6">
-                                                        <i class="fa-regular fa-comments text-2xl text-[#14b8a6]"></i>
-                                                        <h3 class="text-2xl font-bold text-white">Comments</h3>
+                                        <!-- Comments Custom Redesign -->
+                                        <s_rp>
+                                            <div id="comments-section" class="mt-12 max-w-4xl mx-auto">
+                                                <!-- Header -->
+                                                <div class="flex items-center gap-2 mb-6">
+                                                    <i class="fa-regular fa-comments text-2xl text-[#14b8a6]"></i>
+                                                    <h3 class="text-2xl font-bold text-white">Comments</h3>
+                                                </div>
+
+                                                <!-- Input Form -->
+                                                <s_rp_input_form>
+                                                    <!-- Guests: Login Prompt (Activated by style tag in s_rp_guest) -->
+                                                    <div
+                                                        class="guest-login-prompt hidden bg-[#27272a] rounded-2xl py-8 px-6 border border-white/5 border-dashed flex-col items-center justify-center text-center gap-2 mb-12">
+                                                        <div
+                                                            class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-xl mx-auto">
+                                                            <i class="fa-solid fa-lock"></i>
+                                                        </div>
+                                                        <h3 class="text-xl font-bold text-zinc-300">Login Required
+                                                        </h3>
+                                                        <p class="text-zinc-500 text-sm mb-2 mt-1">댓글을 작성하려면 로그인이
+                                                            필요합니다.
+                                                        </p>
+                                                        <a href="https://www.tistory.com/auth/login"
+                                                            class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors border border-white/10 flex items-center justify-center gap-2 w-fit mx-auto mt-2">
+                                                            <span>로그인하러 가기</span>
+                                                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                                                        </a>
                                                     </div>
 
-                                                    <!-- Input Form -->
-                                                    <s_rp_input_form>
-                                                        <!-- Guests: Login Prompt (Activated by style tag in s_rp_guest) -->
-                                                        <div
-                                                            class="guest-login-prompt hidden bg-[#27272a] rounded-2xl py-8 px-6 border border-white/5 border-dashed flex-col items-center justify-center text-center gap-2 mb-12">
+                                                    <div
+                                                        class="comment-form-box bg-[#18181b] rounded-2xl p-6 border border-white/5 mb-12 shadow-lg">
+                                                        <div class="flex gap-4">
+                                                            <!-- Avatar Placeholder -->
                                                             <div
-                                                                class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-500 text-xl mx-auto">
-                                                                <i class="fa-solid fa-lock"></i>
+                                                                class="mt-1.5 shrink-0 w-10 h-10 rounded-full bg-zinc-700 overflow-hidden border border-white/10 flex items-center justify-center relative">
+                                                                <!-- Default: FontAwesome Icon (Safe Fallback) -->
+                                                                <i id="comment-writer-icon"
+                                                                    class="fa-solid fa-user text-zinc-400 text-sm"></i>
+                                                                <!-- Dynamic Image (Hidden by default, shown by script) -->
+                                                                <img id="comment-writer-avatar" src=""
+                                                                    class="absolute inset-0 w-full h-full object-cover hidden">
                                                             </div>
-                                                            <h3 class="text-xl font-bold text-zinc-300">Login Required
-                                                            </h3>
-                                                            <p class="text-zinc-500 text-sm mb-2 mt-1">댓글을 작성하려면 로그인이
-                                                                필요합니다.
-                                                            </p>
-                                                            <a href="https://www.tistory.com/auth/login"
-                                                                class="bg-zinc-800 hover:bg-zinc-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors border border-white/10 flex items-center justify-center gap-2 w-fit mx-auto mt-2">
-                                                                <span>로그인하러 가기</span>
-                                                                <i class="fa-solid fa-arrow-right text-xs"></i>
-                                                            </a>
-                                                        </div>
+                                                            <!-- Script to Sync Avatar from Tistory Toolbar -->
 
-                                                        <div
-                                                            class="comment-form-box bg-[#18181b] rounded-2xl p-6 border border-white/5 mb-12 shadow-lg">
-                                                            <div class="flex gap-4">
-                                                                <!-- Avatar Placeholder -->
+                                                            <!-- Input Area -->
+                                                            <div class="flex-1">
+                                                                <textarea name="[##_rp_input_comment_##]"
+                                                                    placeholder="댓글을 작성하세요..."
+                                                                    class="w-full bg-transparent text-zinc-200 placeholder:text-zinc-600 text-sm resize-none h-24 focus:outline-none mb-4"></textarea>
+
+                                                                <!-- Bottom Controls -->
                                                                 <div
-                                                                    class="mt-1.5 shrink-0 w-10 h-10 rounded-full bg-zinc-700 overflow-hidden border border-white/10 flex items-center justify-center relative">
-                                                                    <!-- Default: FontAwesome Icon (Safe Fallback) -->
-                                                                    <i id="comment-writer-icon"
-                                                                        class="fa-solid fa-user text-zinc-400 text-sm"></i>
-                                                                    <!-- Dynamic Image (Hidden by default, shown by script) -->
-                                                                    <img id="comment-writer-avatar" src=""
-                                                                        class="absolute inset-0 w-full h-full object-cover hidden">
-                                                                </div>
-                                                                <!-- Script to Sync Avatar from Tistory Toolbar -->
+                                                                    class="flex flex-wrap items-center justify-between sm:justify-end gap-3 w-full">
+                                                                    <!-- Secret Checkbox -->
+                                                                    <label
+                                                                        class="flex items-center gap-2 cursor-pointer group">
+                                                                        <input type="checkbox"
+                                                                            name="[##_rp_input_is_secret_##]"
+                                                                            class="w-4 h-4 rounded border-zinc-600 bg-transparent text-[#14b8a6] focus:ring-0 focus:ring-offset-0">
+                                                                        <span
+                                                                            class="text-xs text-zinc-500 group-hover:text-zinc-300 transition-colors">비밀글</span>
+                                                                    </label>
 
-                                                                <!-- Input Area -->
-                                                                <div class="flex-1">
-                                                                    <textarea name="[##_rp_input_comment_##]"
-                                                                        placeholder="댓글을 작성하세요..."
-                                                                        class="w-full bg-transparent text-zinc-200 placeholder:text-zinc-600 text-sm resize-none h-24 focus:outline-none mb-4"></textarea>
-
-                                                                    <!-- Bottom Controls -->
-                                                                    <div
-                                                                        class="flex flex-wrap items-center justify-between sm:justify-end gap-3 w-full">
-                                                                        <!-- Secret Checkbox -->
-                                                                        <label
-                                                                            class="flex items-center gap-2 cursor-pointer group">
-                                                                            <input type="checkbox"
-                                                                                name="[##_rp_input_is_secret_##]"
-                                                                                class="w-4 h-4 rounded border-zinc-600 bg-transparent text-[#14b8a6] focus:ring-0 focus:ring-offset-0">
-                                                                            <span
-                                                                                class="text-xs text-zinc-500 group-hover:text-zinc-300 transition-colors">비밀글</span>
-                                                                        </label>
-
-                                                                        <div class="flex items-center gap-2 ml-auto">
-                                                                            <!-- Submit Button -->
-                                                                            <button
-                                                                                onclick="if(validateComment(this)) [##_rp_onclick_submit_##]"
-                                                                                class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold px-6 py-2.5 rounded-lg border border-white/5 transition-all whitespace-nowrap">
-                                                                                등록
-                                                                            </button>
-                                                                        </div>
-
-                                                                        <!-- Guest Inputs (Hidden, replaces comment form with Login Prompt) -->
-                                                                        <s_rp_guest>
-                                                                            <style>
-                                                                                .comment-form-box {
-                                                                                    display: none !important;
-                                                                                }
-
-                                                                                .guest-login-prompt {
-                                                                                    display: flex !important;
-                                                                                }
-                                                                            </style>
-                                                                            <div class="hidden">
-                                                                                <input type="text"
-                                                                                    name="[##_rp_input_name_##]"
-                                                                                    value="guest">
-                                                                                <input type="password"
-                                                                                    name="[##_rp_input_password_##]"
-                                                                                    value="guest">
-                                                                            </div>
-                                                                        </s_rp_guest>
+                                                                    <div class="flex items-center gap-2 ml-auto">
+                                                                        <!-- Submit Button -->
+                                                                        <button
+                                                                            onclick="if(validateComment(this)) [##_rp_onclick_submit_##]"
+                                                                            class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold px-6 py-2.5 rounded-lg border border-white/5 transition-all whitespace-nowrap">
+                                                                            등록
+                                                                        </button>
                                                                     </div>
+
+                                                                    <!-- Guest Inputs (Hidden, replaces comment form with Login Prompt) -->
+                                                                    <s_rp_guest>
+                                                                        <style>
+                                                                            .comment-form-box {
+                                                                                display: none !important;
+                                                                            }
+
+                                                                            .guest-login-prompt {
+                                                                                display: flex !important;
+                                                                            }
+                                                                        </style>
+                                                                        <div class="hidden">
+                                                                            <input type="text"
+                                                                                name="[##_rp_input_name_##]"
+                                                                                value="guest">
+                                                                            <input type="password"
+                                                                                name="[##_rp_input_password_##]"
+                                                                                value="guest">
+                                                                        </div>
+                                                                    </s_rp_guest>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                </div>
-                                                </s_rp_input_form>
+                                                    </div>
+                                            </div>
+                                            </s_rp_input_form>
 
-                                                <!-- Comment List -->
-                                                <div class="flex flex-col gap-8">
-                                                    <s_rp_container>
-                                                        <ol class="flex flex-col gap-8">
-                                                            <s_rp_rep>
-                                                                <li id="[##_rp_rep_id_##]" class="[##_rp_rep_class_##]">
-                                                                    <div class="flex gap-4 group">
-                                                                        <!-- Avatar -->
-                                                                        <div class="shrink-0">
-                                                                            <img src="[##_rp_rep_logo_##]"
-                                                                                class="w-10 h-10 rounded-full object-cover border border-white/10 [##_rp_rep_class_##]-avatar">
+                                            <!-- Comment List -->
+                                            <div class="flex flex-col gap-8">
+                                                <s_rp_container>
+                                                    <ol class="flex flex-col gap-8">
+                                                        <s_rp_rep>
+                                                            <li id="[##_rp_rep_id_##]" class="[##_rp_rep_class_##]">
+                                                                <div class="flex gap-4 group">
+                                                                    <!-- Avatar -->
+                                                                    <div class="shrink-0">
+                                                                        <img src="[##_rp_rep_logo_##]"
+                                                                            class="w-10 h-10 rounded-full object-cover border border-white/10 [##_rp_rep_class_##]-avatar">
+                                                                    </div>
+                                                                    <!-- Content -->
+                                                                    <!-- Content -->
+                                                                    <div class="flex-1 min-w-0">
+                                                                        <div
+                                                                            class="flex items-baseline gap-3 mb-1 flex-wrap">
+                                                                            <span
+                                                                                class="text-[0.95rem] font-bold text-zinc-200 cursor-pointer hover:underline line-clamp-2 break-all"
+                                                                                onclick="[##_rp_rep_onclick_dropdown_##]">[##_rp_rep_name_##]</span>
+                                                                            <span
+                                                                                class="text-xs text-zinc-600 font-mono shrink-0">[##_rp_rep_date_##]</span>
                                                                         </div>
-                                                                        <!-- Content -->
-                                                                        <!-- Content -->
-                                                                        <div class="flex-1 min-w-0">
-                                                                            <div
-                                                                                class="flex items-baseline gap-3 mb-1 flex-wrap">
-                                                                                <span
-                                                                                    class="text-[0.95rem] font-bold text-zinc-200 cursor-pointer hover:underline line-clamp-2 break-all"
-                                                                                    onclick="[##_rp_rep_onclick_dropdown_##]">[##_rp_rep_name_##]</span>
-                                                                                <span
-                                                                                    class="text-xs text-zinc-600 font-mono shrink-0">[##_rp_rep_date_##]</span>
-                                                                            </div>
 
-                                                                            <div
-                                                                                class="text-[0.95rem] text-zinc-300 leading-7 mb-2 [##_rp_rep_class_##]-content">
-                                                                                [##_rp_rep_desc_##]
-                                                                            </div>
+                                                                        <div
+                                                                            class="text-[0.95rem] text-zinc-300 leading-7 mb-2 [##_rp_rep_class_##]-content">
+                                                                            [##_rp_rep_desc_##]
+                                                                        </div>
 
-                                                                            <div
-                                                                                class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-zinc-500">
-                                                                                <a href="#"
-                                                                                    onclick="[##_rp_rep_onclick_reply_##]"
-                                                                                    class="hover:text-zinc-300">답글</a>
-                                                                                <a href="#"
-                                                                                    onclick="[##_rp_rep_onclick_delete_##]"
-                                                                                    class="hover:text-red-400">수정/삭제</a>
-                                                                            </div>
+                                                                        <div
+                                                                            class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-zinc-500">
+                                                                            <a href="#"
+                                                                                onclick="[##_rp_rep_onclick_reply_##]"
+                                                                                class="hover:text-zinc-300">답글</a>
+                                                                            <a href="#"
+                                                                                onclick="[##_rp_rep_onclick_delete_##]"
+                                                                                class="hover:text-red-400">수정/삭제</a>
                                                                         </div>
                                                                     </div>
+                                                                </div>
 
-                                                                    <!-- Replies -->
-                                                                    <s_rp2_container>
-                                                                        <ul class="mt-6 ml-14 flex flex-col gap-6">
-                                                                            <s_rp2_rep>
-                                                                                <li id="[##_rp_rep_id_##]"
-                                                                                    class="[##_rp_rep_class_##]">
-                                                                                    <div class="flex gap-4 group">
-                                                                                        <div class="shrink-0">
-                                                                                            <img src="[##_rp_rep_logo_##]"
-                                                                                                class="w-9 h-9 rounded-full object-cover border border-white/10 [##_rp_rep_class_##]-avatar">
+                                                                <!-- Replies -->
+                                                                <s_rp2_container>
+                                                                    <ul class="mt-6 ml-14 flex flex-col gap-6">
+                                                                        <s_rp2_rep>
+                                                                            <li id="[##_rp_rep_id_##]"
+                                                                                class="[##_rp_rep_class_##]">
+                                                                                <div class="flex gap-4 group">
+                                                                                    <div class="shrink-0">
+                                                                                        <img src="[##_rp_rep_logo_##]"
+                                                                                            class="w-9 h-9 rounded-full object-cover border border-white/10 [##_rp_rep_class_##]-avatar">
+                                                                                    </div>
+                                                                                    <div class="flex-1 min-w-0">
+                                                                                        <div
+                                                                                            class="flex items-baseline gap-2 mb-1 flex-wrap">
+                                                                                            <span
+                                                                                                class="text-sm font-bold text-zinc-200 line-clamp-2 break-all">[##_rp_rep_name_##]</span>
+                                                                                            <span
+                                                                                                class="text-xs text-zinc-600 font-mono shrink-0">[##_rp_rep_date_##]</span>
                                                                                         </div>
-                                                                                        <div class="flex-1 min-w-0">
-                                                                                            <div
-                                                                                                class="flex items-baseline gap-2 mb-1 flex-wrap">
-                                                                                                <span
-                                                                                                    class="text-sm font-bold text-zinc-200 line-clamp-2 break-all">[##_rp_rep_name_##]</span>
-                                                                                                <span
-                                                                                                    class="text-xs text-zinc-600 font-mono shrink-0">[##_rp_rep_date_##]</span>
-                                                                                            </div>
-                                                                                            <div
-                                                                                                class="text-sm text-zinc-300 leading-relaxed mb-2">
-                                                                                                [##_rp_rep_desc_##]
-                                                                                            </div>
-                                                                                            <div
-                                                                                                class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-zinc-500">
-                                                                                                <a href="#"
-                                                                                                    onclick="[##_rp_rep_onclick_delete_##]"
-                                                                                                    class="hover:text-red-400">수정/삭제</a>
-                                                                                            </div>
+                                                                                        <div
+                                                                                            class="text-sm text-zinc-300 leading-relaxed mb-2">
+                                                                                            [##_rp_rep_desc_##]
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-zinc-500">
+                                                                                            <a href="#"
+                                                                                                onclick="[##_rp_rep_onclick_delete_##]"
+                                                                                                class="hover:text-red-400">수정/삭제</a>
                                                                                         </div>
                                                                                     </div>
-                                                                                </li>
-                                                                            </s_rp2_rep>
-                                                                        </ul>
-                                                                    </s_rp2_container>
-                                                                </li>
-                                                            </s_rp_rep>
-                                                        </ol>
-                                                    </s_rp_container>
+                                                                                </div>
+                                                                            </li>
+                                                                        </s_rp2_rep>
+                                                                    </ul>
+                                                                </s_rp2_container>
+                                                            </li>
+                                                        </s_rp_rep>
+                                                    </ol>
+                                                </s_rp_container>
 
 
-                                                </div>
+                                            </div>
                                 </div>
                                 </s_rp>
                                 </article>
@@ -1019,29 +1109,33 @@
         <!-- 🚨 [사용자 수정] 🚨 하단 푸터 영역입니다. 이메일, SNS 링크, 카피라이트는 티스토리 [스킨 편집] 화면에서 직접 입력하실 수 있습니다. -->
         <footer
             class="py-12 text-center text-textSub text-xs border-t border-zinc-800/50 mt-auto relative z-10 bg-bgBody/50 backdrop-blur-sm">
-            
+
             <!-- Social Links (index.xml 변수 연동) -->
             <div class="flex justify-center items-center gap-4 mb-6">
                 <s_if_var_github_url>
-                    <a href="[##_var_github_url_##]" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
+                    <a href="[##_var_github_url_##]" target="_blank" rel="noopener noreferrer"
+                        class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
                         <i class="fa-brands fa-github text-sm"></i>
                     </a>
                 </s_if_var_github_url>
-                
+
                 <s_if_var_instagram_url>
-                    <a href="[##_var_instagram_url_##]" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
+                    <a href="[##_var_instagram_url_##]" target="_blank" rel="noopener noreferrer"
+                        class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
                         <i class="fa-brands fa-instagram text-sm"></i>
                     </a>
                 </s_if_var_instagram_url>
-                
+
                 <s_if_var_twitter_url>
-                    <a href="[##_var_twitter_url_##]" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
+                    <a href="[##_var_twitter_url_##]" target="_blank" rel="noopener noreferrer"
+                        class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
                         <i class="fa-brands fa-x-twitter text-sm"></i>
                     </a>
                 </s_if_var_twitter_url>
 
                 <s_if_var_contact_email>
-                    <a href="mailto:[##_var_contact_email_##]" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
+                    <a href="mailto:[##_var_contact_email_##]"
+                        class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent hover:text-black transition-colors">
                         <i class="fa-solid fa-envelope text-sm"></i>
                     </a>
                 </s_if_var_contact_email>
